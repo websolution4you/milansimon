@@ -687,13 +687,13 @@ main {
     /* Na mobile potrebujeme fixnú hlavičku, inak sa kategórie pri scrollovaní dostanú pod ňu */
     .main-header {
         position: fixed;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%); /* Jemný prechod namiesto tvrdej čiernej */
-        backdrop-filter: none;
+        background-color: rgba(26, 26, 26, 0.95); /* Vrátené plné tmavé pozadie */
+        backdrop-filter: blur(10px);
     }
     
     .main-header.header-solid {
         position: fixed;
-        background: #1a1a1a; /* Pre podstránky zostane plná čierna */
+        background-color: rgba(26, 26, 26, 0.95);
     }
     
     /* DOMOVSKÁ STRÁNKA NA MOBILE */
@@ -733,20 +733,20 @@ main {
     .categories-grid {
         display: block; 
         height: auto;
-        padding-top: 0px; /* Zrušené odsadenie! Fotka pôjde až po horný okraj */
+        padding-top: 55px; /* Vrátené odsadenie, fotka začína až pod čiernou hlavičkou */
     }
     
     /* Každá karta je teraz samostatný vysoký blok */
     .category-card {
-        height: 85vh; /* Trošku vyššie karty pre epickejší vzhľad */
+        height: 80vh; /* Vrátené na 80vh, aby to lepšie sedelo s odsadením */
         width: 100%;
         margin-bottom: 2px;
         display: block;
     }
 
-    /* Úprava orezania prvej fotky pre úzke mobily */
+    /* Úprava orezania prvej fotky pre úzke mobily - toto zaručí, že hlava nie je orezaná */
     .card-portrety img {
-        object-position: center top !important; /* Hlava bude vždy viditeľná, neoreže ju zhora */
+        object-position: center top !important; /* Hlava bude vždy viditeľná, orezáva len spodok (ramená) */
     }
 
     /* 3. Obrázky na mobile - defaultne čiernobiele */

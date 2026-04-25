@@ -1,0 +1,377 @@
+/* Reset a premenné */
+:root {
+    --color-bg: #ffffff;
+    --color-text: #333333;
+    --color-text-light: #777777;
+    --color-accent: #2c5f5d; /* Tmavá zelená inšpirovaná pbphoto.sk */
+    --color-accent-light: #528c89;
+    --color-border: #eeeeee;
+    
+    --font-heading: 'Montserrat', sans-serif; /* Prémiový, širší font */
+    --font-body: 'Lato', sans-serif; /* Čistý, ľahko čitateľný text */
+    
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 4rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* Hlavička a Navigácia */
+.main-header {
+    background-color: transparent; /* Priehľadná hlavička podľa vzoru */
+    position: absolute; /* Aby išla cez obrázky, nie nad nimi */
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    border-bottom: none; /* Zrušený border */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    max-width: 1400px; /* Možno ešte zväčšíme ak to má byť viac na okrajoch */
+    margin: 0 auto;
+}
+
+.logo {
+    text-decoration: none;
+    color: white; /* Biely text loga na tmavej fotke */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Pre lepšiu čitateľnosť */
+}
+
+.logo h1 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    color: #e0e0e0;
+}
+
+.main-nav {
+    margin-left: auto; /* Toto posunie celú navigáciu úplne doprava */
+    margin-right: 3rem; /* Jemná medzera od okrajových ikoniek alebo pravého kraja */
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: white; /* Biele linky */
+    font-family: var(--font-heading); /* Pre menu použijeme tiež Montserrat pre jednotnosť */
+    font-weight: 300; /* Tenší font podľa obrázka */
+    font-size: 0.95rem; 
+    letter-spacing: 1px; /* Jemná medzera */
+    text-transform: none; /* Normálne začiatočné veľké písmená, nie všetko UPPERCASE */
+    transition: color 0.3s ease;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.main-nav a:hover {
+    color: #cccccc;
+}
+
+.header-socials {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.header-socials a {
+    color: white; /* Biele ikonky */
+    transition: color 0.3s ease;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.header-socials a:hover {
+    color: #cccccc;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Kategórie Portfólia - Úvod (Karty) */
+.categories-grid {
+    display: flex;
+    width: 100%;
+    height: 100vh; /* Roztiahnuté na CELÚ výšku obrazovky, presne podľa obrázku */
+    margin: 0;
+    padding: 0;
+}
+
+.category-card {
+    position: relative;
+    overflow: hidden;
+    flex: 1; /* Každá karta rovnako široká */
+    height: 100%; 
+    display: block;
+}
+
+.category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center; /* Vraciame na stred, kedze pri tejto fotke to nefungovalo */
+    filter: grayscale(20%) contrast(90%); 
+    transition: filter 0.5s ease; /* Pridáme transition pre fotku */
+}
+
+/* Zrušený HACK pre posun hlavy, pretože to robilo čierne okraje. Vrátené do pôvodného stavu. */
+
+.category-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    background: rgba(0, 0, 0, 0.4); 
+    transition: background 0.5s ease; /* Pridáme transition pre overlay */
+    pointer-events: none; /* Aby sme pri hoveri nad celým panelom nespustili len button, ale reagoval celý panel */
+}
+
+/* Tlačidlo musíme vrátiť na klikateľné */
+.category-btn {
+    pointer-events: auto;
+    background-color: rgba(255, 255, 255, 0.6); /* Biela farba, ale priehľadná (ako bolo požadované) */
+    backdrop-filter: blur(8px); /* Efekt matného skla zostáva */
+    color: #000000;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.2rem 3rem; 
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.category-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--color-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Hover efekt na CELÝ PANEL (kategóriu) */
+.category-card:hover img {
+    filter: grayscale(0%) contrast(105%); /* Fotka sa rozžiari do plných farieb */
+}
+
+.category-card:hover .category-overlay {
+    background: rgba(0, 0, 0, 0.1); /* Tmavý filter takmer úplne zmizne */
+}
+
+/* Mozaika Portfólia */
+.masonry-grid {
+    column-count: 3;
+    column-gap: var(--spacing-md);
+    padding: var(--spacing-xl) 0;
+}
+
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: var(--spacing-md);
+}
+
+.masonry-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    transition: opacity 0.3s ease;
+}
+
+.masonry-item:hover img {
+    opacity: 0.9;
+}
+
+/* Pätička */
+.main-footer {
+    background-color: #fafafa;
+    border-top: 1px solid var(--color-border);
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.footer-links a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    margin: 0 var(--spacing-sm);
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--color-accent);
+}
+
+/* Formulár */
+.contact-form {
+    max-width: 600px;
+    margin: var(--spacing-xl) auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.btn-submit {
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: var(--color-accent-light);
+}
+
+/* O mne sekcia */
+.about-section {
+    display: flex;
+    gap: var(--spacing-xl);
+    align-items: center;
+    padding: var(--spacing-xl) 0;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-accent);
+}
+
+/* Responzivita */
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+    }
+    .mobile-menu-btn {
+        display: block;
+    }
+    .categories-grid {
+        flex-direction: column; /* Na mobiloch pod sebou */
+        height: auto; /* Zrušíme 100vh pre mobily, inak by to bolo stlačené */
+    }
+    .category-card {
+        height: 50vh; /* Na mobiloch nižšie panely */
+        width: 100%;
+    }
+    .masonry-grid {
+        column-count: 2;
+    }
+    .about-section {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .masonry-grid {
+        column-count: 1;
+    }
+    .header-socials {
+        display: none;
+    }
+}

@@ -4,12 +4,6 @@ $is_subpage = true;
 require __DIR__ . '/layout/header.php'; 
 ?>
 
-<!-- Hlavička podstránky (rovnaký štýl ako portfólio) -->
-<div class="page-header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; padding: 120px 0 80px; text-align: center; color: white;">
-    <h1 style="font-family: var(--font-heading); font-weight: 300; font-size: 3rem; letter-spacing: 4px; text-transform: uppercase;">O mne</h1>
-    <p style="font-family: var(--font-body); font-size: 1.1rem; color: #ccc; max-width: 600px; margin: 20px auto 0;">Svetlo, tieň a momenty, ktoré tvoria príbeh.</p>
-</div>
-
 <div class="container">
     <!-- Hlavná sekcia (Príbeh a Fotka) -->
     <section class="about-hero">

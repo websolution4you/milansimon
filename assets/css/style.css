@@ -484,18 +484,7 @@ main {
 .about-hero-image {
     flex: 1;
     position: relative;
-}
-
-/* Dekoračný prvok pod fotkou */
-.about-hero-image::after {
-    content: '';
-    position: absolute;
-    bottom: -20px;
-    right: -20px;
-    width: 100%;
-    height: 100%;
-    border: 2px solid var(--color-accent);
-    z-index: -1;
+    max-width: 50%;
 }
 
 .about-hero-image img {
@@ -503,6 +492,11 @@ main {
     border-radius: 4px;
     object-fit: cover;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: block;
+    /* Rám je teraz priamo súčasťou obrázka, neposúva sa pri zmene veľkosti okna */
+    border: 3px solid var(--color-accent);
+    padding: 15px; /* Priestor medzi fotkou a rámikom (tzv. pasparta) */
+    background-color: white; /* Farba pasparty */
 }
 
 .about-hero-text {
@@ -633,9 +627,8 @@ main {
         padding: 60px 0;
         gap: 40px;
     }
-    .about-hero-image::after {
-        bottom: -10px;
-        right: -10px;
+    .about-hero-image {
+        max-width: 100%;
     }
     .about-features {
         grid-template-columns: 1fr;

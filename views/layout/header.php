@@ -21,7 +21,7 @@
         </a>
         <nav class="main-nav">
             <ul>
-                <li><a href="/portfolio">Portfólio</a></li>
+                <li><a href="/">Portfólio</a></li>
                 <li><a href="/o-mne">O mne</a></li>
                 <li><a href="/kontakt">Kontakt</a></li>
             </ul>

@@ -16,19 +16,21 @@ if (is_dir($dir)) {
     }
 }
 
+// Zmena hlavičky pre podstránky (aby nebola transparentná nad obrázkami ako na domovskej)
+$is_subpage = true; 
 require __DIR__ . '/layout/header.php'; 
 ?>
 
-<div class="container">
-    <section style="padding: var(--spacing-xl) 0; text-align: center;">
-        <h2 style="font-family: var(--font-heading); font-weight: 300; font-size: 2.5rem; color: var(--color-accent); margin-bottom: var(--spacing-md); text-transform: uppercase;"><?php echo htmlspecialchars($title); ?></h2>
-        <a href="/portfolio" style="color: var(--color-text-light); text-decoration: none;">&larr; Späť na kategórie</a>
-    </section>
+<div class="portfolio-detail-header">
+    <h2><?php echo htmlspecialchars($title); ?></h2>
+    <a href="/" class="back-link">&larr; Späť na domov</a>
+</div>
 
-    <!-- Mozaika (Masonry Layout) -->
-    <section class="masonry-grid">
+<!-- Mozaika (Masonry Layout Full-width) -->
+<div class="portfolio-masonry-wrapper">
+    <section class="masonry-grid-full">
         <?php foreach ($photos as $photo): ?>
-        <div class="masonry-item">
+        <div class="masonry-item-full">
             <img src="<?php echo $photo; ?>" alt="Fotografia portfólia">
         </div>
         <?php endforeach; ?>

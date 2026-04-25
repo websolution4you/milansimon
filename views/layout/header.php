@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<header class="main-header">
+<header class="main-header <?php echo isset($is_subpage) ? 'header-solid' : ''; ?>">
     <div class="header-container">
         <a href="/" class="logo">
             <h1>MILAN SIMON</h1>

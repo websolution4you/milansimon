@@ -14,8 +14,7 @@ require __DIR__ . '/layout/header.php';
     <!-- Hlavná sekcia (Príbeh a Fotka) -->
     <section class="about-hero">
         <div class="about-hero-image">
-            <!-- Nahradíme placeholder niečím, čo vyzerá ako profesionálny fotograf -->
-            <img src="https://images.unsplash.com/photo-1554046920-90dcac0536d1?auto=format&fit=crop&w=800&q=80" alt="Milan Simon Fotograf">
+            <img src="https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=800&q=80" alt="Fotografické vybavenie a prístup">
         </div>
         <div class="about-hero-text">
             <span class="about-subtitle">Môj prístup</span>

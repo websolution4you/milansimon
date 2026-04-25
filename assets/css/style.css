@@ -473,57 +473,173 @@ main {
     background-color: var(--color-accent-light);
 }
 
-/* O mne sekcia */
-.about-section {
+/* O mne sekcia - Nový dizajn */
+.about-hero {
     display: flex;
-    gap: var(--spacing-xl);
+    gap: 80px;
     align-items: center;
-    padding: var(--spacing-xl) 0;
+    padding: 100px 0;
 }
 
-.about-image {
+.about-hero-image {
     flex: 1;
+    position: relative;
 }
 
-.about-image img {
+/* Dekoračný prvok pod fotkou */
+.about-hero-image::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--color-accent);
+    z-index: -1;
+}
+
+.about-hero-image img {
     width: 100%;
     border-radius: 4px;
     object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-.about-text {
+.about-hero-text {
     flex: 1;
 }
 
-.about-text h2 {
+.about-subtitle {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.about-hero-text h2 {
     font-family: var(--font-heading);
     font-size: 2.5rem;
     font-weight: 300;
-    margin-bottom: var(--spacing-md);
-    color: var(--color-accent);
+    margin-bottom: 30px;
+    color: #111;
+    line-height: 1.2;
 }
 
-/* Responzivita */
-@media (max-width: 768px) {
-    .main-nav {
-        display: none;
-    }
-    .mobile-menu-btn {
-        display: block;
-    }
-    .categories-grid {
-        flex-direction: column; /* Na mobiloch pod sebou */
-        height: auto; /* Zrušíme 100vh pre mobily, inak by to bolo stlačené */
-    }
-    .category-card {
-        height: 50vh; /* Na mobiloch nižšie panely */
-        width: 100%;
-    }
-    .masonry-grid {
-        column-count: 2;
-    }
-    .about-section {
+.about-hero-text p {
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    color: #555;
+}
+
+.about-signature {
+    font-family: 'Playfair Display', serif; /* Ak tento font zostal, inak sa aplikuje fallback */
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--color-text-light);
+    margin-top: 40px;
+}
+
+/* O mne - Ikonky / Vlastnosti */
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding: 0 0 100px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.feature-box {
+    text-align: center;
+    padding: 30px;
+    background: #fafafa;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+}
+
+.feature-box h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.feature-box p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Call to Action pre O mne / Všeobecné */
+.about-cta {
+    background-color: var(--color-accent);
+    color: white;
+    padding: 80px 0;
+    margin-bottom: -60px; /* Aby to sedelo pred footrom */
+}
+
+.text-center {
+    text-align: center;
+}
+
+.about-cta h2 {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.about-cta p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: white;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 15px 40px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #111;
+    color: white;
+}
+
+/* Responzivita aktualizovaná */
+@media (max-width: 992px) {
+    .about-hero {
         flex-direction: column;
+        padding: 60px 0;
+        gap: 40px;
+    }
+    .about-hero-image::after {
+        bottom: -10px;
+        right: -10px;
+    }
+    .about-features {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
 

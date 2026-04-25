@@ -729,11 +729,14 @@ main {
         white-space: nowrap !important; /* TVRDÝ ZÁKAZ zalamovania */
     }
     
-    /* Posunieme celé kategórie späť úplne hore (pod hlavičku), aby prvá fotka nebola orezaná */
+        /* Posunieme celé kategórie nižšie, aby fotka začínala až pod čiernou hlavičkou */
     .categories-grid {
         display: block; 
         height: auto;
-        padding-top: 55px; /* Vrátené odsadenie, fotka začína až pod čiernou hlavičkou */
+        /* Výška hlavičky je cca 50-60px. Pridáme presne toľko margin-top (nie padding), 
+           aby sa celý grid posunul reálne nižšie */
+        margin-top: 55px; 
+        padding-top: 0;
     }
     
     /* Každá karta je teraz samostatný vysoký blok */

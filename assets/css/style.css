@@ -688,17 +688,46 @@ main {
         font-size: 0.8rem;
     }
     
+    /* Úprava hlavičky pre mobilné zobrazenie */
     .header-container {
         padding: 1rem;
+        justify-content: space-between;
+    }
+    
+    /* Zmenšenie loga */
+    .logo h1 {
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+    }
+    
+    .logo span {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+    }
+    
+    /* Úprava menu aby sa zmestilo vedľa loga */
+    .main-nav {
+        margin-right: 0;
+    }
+    
+    .main-nav ul {
+        gap: 12px; /* Menšie medzery medzi položkami */
+    }
+    
+    .main-nav a {
+        font-size: 0.85rem;
+        white-space: nowrap; /* ZABRÁNI ZALOMENIU "O mne" na dva riadky */
+    }
+    
+    /* Skrytie sociálnych sietí na mobile pre viac priestoru na menu */
+    .header-socials {
+        display: none;
     }
 }
 
 @media (max-width: 480px) {
-    .masonry-grid {
+    .masonry-grid-full {
         column-count: 1;
-    }
-    .header-socials {
-        display: none;
     }
 }
 

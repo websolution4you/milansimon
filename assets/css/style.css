@@ -191,17 +191,33 @@ main {
     background-color: rgba(255, 255, 255, 0.6); /* Biela farba, ale priehľadná (ako bolo požadované) */
     backdrop-filter: blur(8px); /* Efekt matného skla zostáva */
     color: #000000;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
     text-decoration: none;
-    padding: 1.2rem 3rem; 
+    padding: 1.5rem 2.5rem; 
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    max-width: 80%;
+    text-align: center;
+}
+
+.category-btn .btn-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.category-btn .btn-desc {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: #333;
+    opacity: 0.9;
 }
 
 .category-btn:hover {
@@ -209,6 +225,10 @@ main {
     color: var(--color-accent);
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.category-btn:hover .btn-title {
+    color: var(--color-accent);
 }
 
 /* Hover efekt na CELÝ PANEL (kategóriu) */
@@ -221,6 +241,7 @@ main {
 }
 
 /* Mozaika Portfólia - Nový dizajn podľa referencie */
+
 .portfolio-masonry-wrapper {
     width: 100%;
     background-color: #111111; /* Veľmi tmavé pozadie pre mikro-medzery */
@@ -650,6 +671,27 @@ main {
     }
 }
 
+@media (max-width: 768px) {
+    .categories-grid {
+        flex-direction: column;
+    }
+    
+    .category-btn {
+        padding: 1rem 1.5rem;
+    }
+    
+    .category-btn .btn-title {
+        font-size: 0.9rem;
+    }
+    
+    .category-btn .btn-desc {
+        font-size: 0.8rem;
+    }
+    
+    .header-container {
+        padding: 1rem;
+    }
+}
 
 @media (max-width: 480px) {
     .masonry-grid {
@@ -659,6 +701,7 @@ main {
         display: none;
     }
 }
+
 
 
 /* ROZŠÍRITEĽNÝ FOOTER (PETER BRICHTA ŠTÝL) */

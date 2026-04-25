@@ -730,14 +730,14 @@ main {
     }
     
         /* Posunieme celé kategórie nižšie, aby fotka začínala až pod čiernou hlavičkou */
-    .categories-grid {
-        display: block; 
-        height: auto;
-        /* Výška hlavičky je cca 50-60px. Pridáme presne toľko margin-top (nie padding), 
-           aby sa celý grid posunul reálne nižšie */
-        margin-top: 55px; 
-        padding-top: 0;
-    }
+        .categories-grid {
+            display: block; 
+            height: auto;
+            /* Výška hlavičky je cca 70px. Pridáme presne toľko margin-top (nie padding), 
+               aby sa celý grid posunul reálne nižšie */
+            margin-top: 71px; 
+            padding-top: 0;
+        }
     
     /* Každá karta je teraz samostatný vysoký blok */
     .category-card {

@@ -221,43 +221,38 @@ main {
 }
 
 /* Mozaika Portfólia - Nový dizajn podľa referencie */
-.portfolio-detail-header {
-    background-color: var(--color-accent);
-    color: white;
-    padding: var(--spacing-xl) 0 var(--spacing-lg) 0;
-    text-align: center;
-    position: relative; /* Aby sme pod to mohli dať menu */
-    z-index: 10;
-}
-
-.portfolio-detail-header h2 {
-    font-family: var(--font-heading);
-    font-weight: 300;
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing-md);
-    text-transform: uppercase;
-}
-
-.portfolio-detail-header .back-link {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.3s;
-}
-
-.portfolio-detail-header .back-link:hover {
-    color: white;
-}
-
 .portfolio-masonry-wrapper {
     width: 100%;
-    /* Odstránené paddingy pre full-width vzhľad ako na referencii */
-    background-color: #f5f5f5; /* Jemné pozadie pre lepšie vyniknutie fotiek */
+    background-color: #111111; /* Veľmi tmavé pozadie pre mikro-medzery */
+    position: relative; /* Dôležité pre absolútne pozicovanie tlačidla späť */
+    padding: 4px; /* Okraj okolo celej mriežky */
+}
+
+.floating-back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    backdrop-filter: blur(5px);
+    transition: background-color 0.3s ease;
+}
+
+.floating-back-btn:hover {
+    background-color: var(--color-accent);
 }
 
 .masonry-grid-full {
     column-count: 4; /* Viac stĺpcov ako pôvodne (3) */
-    column-gap: 0; /* Žiadne medzery medzi stĺpcami */
+    column-gap: 4px; /* 3. Mikro-medzera medzi stĺpcami */
     padding: 0;
 }
 
@@ -281,24 +276,98 @@ main {
 
 .masonry-item-full {
     break-inside: avoid;
-    margin-bottom: 0; /* Žiadne medzery medzi fotkami vertikálne */
+    margin-bottom: 4px; /* 3. Mikro-medzera vertikálne */
     position: relative;
     overflow: hidden;
+    cursor: pointer; /* Indikátor, že sa dá na fotku kliknúť */
+    /* Nástupná animácia (teraz cez JS Intersection Observer pre spoľahlivosť) */
+    opacity: 0; 
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.masonry-item-full.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .masonry-item-full img {
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.4s ease, filter 0.4s ease;
-    /* Fotky mierne stmavené v základnom stave */
-    filter: brightness(0.9);
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
+    /* 4. Čiernobielo-stmavený základ - trochu zjemnený na 50%, aby to nebolo úplne bez farieb */
+    filter: grayscale(50%) brightness(0.8);
 }
 
 .masonry-item-full:hover img {
-    transform: scale(1.05); /* Jemný zoom na hover */
-    filter: brightness(1.1); /* Zosvetlenie na hover */
+    transform: scale(1.03); /* Jemný zoom na hover */
+    /* 4. Plné oživenie farieb na hover */
+    filter: grayscale(0%) brightness(1.05); 
 }
+
+/* 1. LIGHTBOX (Zväčšovacie okno) */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    border-radius: 4px;
+    transform: scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.lightbox-overlay.active .lightbox-img {
+    transform: scale(1);
+}
+
+.lightbox-close, .lightbox-prev, .lightbox-next {
+    position: absolute;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 2001;
+    padding: 20px;
+}
+
+.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.lightbox-close { top: 20px; right: 20px; }
+.lightbox-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+.lightbox-next { right: 20px; top: 50%; transform: translateY(-50%); }
+
+.lightbox-prev:hover { transform: translateY(-50%) scale(1.2); }
+.lightbox-next:hover { transform: translateY(-50%) scale(1.2); }
 
 /* Prekrývací text na fotkách (voliteľné, ak by sme chceli napr. názvy eventov) */
 .masonry-item-overlay {

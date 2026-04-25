@@ -16,25 +16,43 @@ if (is_dir($dir)) {
     }
 }
 
+// SIMULÁCIA: Zduplikujeme fotky a náhodne ich zamiešame, aby sme simulovali väčšiu galériu
+$all_photos = [];
+if (!empty($photos)) {
+    // Skopírujeme ich 4x, aby sme ich mali dostatok na ukážku
+    for ($i = 0; $i < 4; $i++) {
+        $all_photos = array_merge($all_photos, $photos);
+    }
+    // Zamiešame poradie
+    shuffle($all_photos);
+}
+
 // Zmena hlavičky pre podstránky (aby nebola transparentná nad obrázkami ako na domovskej)
 $is_subpage = true; 
 require __DIR__ . '/layout/header.php'; 
 ?>
 
-<div class="portfolio-detail-header">
-    <h2><?php echo htmlspecialchars($title); ?></h2>
-    <a href="/" class="back-link">&larr; Späť na domov</a>
-</div>
-
 <!-- Mozaika (Masonry Layout Full-width) -->
 <div class="portfolio-masonry-wrapper">
-    <section class="masonry-grid-full">
-        <?php foreach ($photos as $photo): ?>
-        <div class="masonry-item-full">
-            <img src="<?php echo $photo; ?>" alt="Fotografia portfólia">
+    <a href="/" class="floating-back-btn">&larr; Späť na domov</a>
+    
+        <section class="masonry-grid-full">
+        <?php foreach ($all_photos as $index => $photo): ?>
+        <div class="masonry-item-full portfolio-img">
+            <img src="<?php echo $photo; ?>" alt="Fotografia portfólia <?php echo $index; ?>" loading="lazy" data-src="<?php echo $photo; ?>">
         </div>
         <?php endforeach; ?>
     </section>
 </div>
 
+<!-- Lightbox Modal -->
+<div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
+    <button class="lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+    <img src="" alt="Zväčšená fotografia" class="lightbox-img" id="lightboxImg">
+    <button class="lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+</div>
+
 <?php require __DIR__ . '/layout/footer.php'; ?>
+
+

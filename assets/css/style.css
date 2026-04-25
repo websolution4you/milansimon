@@ -673,17 +673,31 @@ main {
 
 /* Zabezpečenie správneho odsadenia pod fixnou priehľadnou hlavičkou */
 .main-header {
-    position: fixed; /* Fixný header */
-    background-color: rgba(26, 26, 26, 0.95); /* Tmavá polopriehľadná */
-    backdrop-filter: blur(10px);
+    position: absolute; /* Vrátené na absolute pre desktop, aby bola priehľadná cez obrázok */
+    background-color: transparent;
+    backdrop-filter: none;
 }
 
 .main-header.header-solid {
-    position: fixed;
+    position: relative;
+    background-color: #1a1a1a;
 }
 
 @media (max-width: 768px) {
+    /* Na mobile potrebujeme fixnú hlavičku, inak sa kategórie pri scrollovaní dostanú pod ňu */
+    .main-header {
+        position: fixed;
+        background-color: rgba(26, 26, 26, 0.95);
+        backdrop-filter: blur(10px);
+    }
+    
+    .main-header.header-solid {
+        position: fixed;
+        background-color: rgba(26, 26, 26, 0.95);
+    }
+    
     /* DOMOVSKÁ STRÁNKA NA MOBILE */
+
     
     /* 1. Header upravíme tak, aby bol pevný hore a menší */
     .header-container {

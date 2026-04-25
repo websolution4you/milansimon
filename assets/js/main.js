@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index >= imagesArray.length) currentIndex = 0;
             if (index < 0) currentIndex = imagesArray.length - 1;
             
-            const src = imagesArray[currentIndex].getAttribute('data-src');
+            const src = imagesArray[currentIndex].getAttribute('data-src') || imagesArray[currentIndex].src;
             lightboxImg.src = src;
         };
 

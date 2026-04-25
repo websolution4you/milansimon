@@ -428,6 +428,20 @@ main {
     gap: var(--spacing-md);
 }
 
+.form-row {
+    display: flex;
+    gap: var(--spacing-md);
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+}
+
+
 .form-group {
     display: flex;
     flex-direction: column;

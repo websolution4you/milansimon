@@ -15,12 +15,11 @@ function get_category_thumbnail($category) {
 
 <!-- Zobrazenie kategórií na domovskej stránke -->
 <section class="categories-grid">
-    <div class="category-card card-portrety">
+        <div class="category-card card-portrety">
         <img src="/assets/img/portrety/20211209101600pm.jpg" alt="Fotenie portrétov">
         <div class="category-overlay">
             <a href="/portfolio/portrety" class="category-btn">
                 <span class="btn-title">BIZNIS PORTRÉTY</span>
-                <span class="btn-desc">Profesionálne portréty pre firmy a osobnú značku</span>
             </a>
         </div>
     </div>
@@ -29,7 +28,6 @@ function get_category_thumbnail($category) {
         <div class="category-overlay">
             <a href="/portfolio/sport" class="category-btn">
                 <span class="btn-title">REKLAMA A ŠPORT</span>
-                <span class="btn-desc">Dynamické vizuály pre kampane a značky</span>
             </a>
         </div>
     </div>
@@ -38,7 +36,6 @@ function get_category_thumbnail($category) {
         <div class="category-overlay">
             <a href="/portfolio/eventy" class="category-btn">
                 <span class="btn-title">EVENTY</span>
-                <span class="btn-desc">Reportážna fotografia z podujatí</span>
             </a>
         </div>
     </div>

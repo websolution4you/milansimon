@@ -687,42 +687,71 @@ main {
     /* Na mobile potrebujeme fixnú hlavičku, inak sa kategórie pri scrollovaní dostanú pod ňu */
     .main-header {
         position: fixed;
-        background-color: rgba(26, 26, 26, 0.95);
-        backdrop-filter: blur(10px);
+        background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%); /* Jemný prechod namiesto tvrdej čiernej */
+        backdrop-filter: none;
     }
     
     .main-header.header-solid {
         position: fixed;
-        background-color: rgba(26, 26, 26, 0.95);
+        background: #1a1a1a; /* Pre podstránky zostane plná čierna */
     }
     
     /* DOMOVSKÁ STRÁNKA NA MOBILE */
-
     
     /* 1. Header upravíme tak, aby bol pevný hore a menší */
     .header-container {
-        padding: 0.8rem 1rem;
+        padding: 1rem 0.5rem; /* Zmenšené okraje, aby bolo viac miesta pre menu */
     }
     
-    /* Posunieme celé kategórie pod hlavičku, už to nie je 100vh ale viac. */
-    /* Odstránime height: 100vh, aby to mohlo voľne rásť */
+    /* Zmenšenie loga, aby nebralo toľko šírky */
+    .logo h1 {
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .logo span {
+        font-size: 0.55rem;
+        letter-spacing: 1.5px;
+    }
+    
+    /* Úprava menu aby sa stopercentne zmestilo a nezalomilo */
+    .main-nav {
+        margin-right: 0;
+        flex-shrink: 0; /* Zabráni stlačeniu flexboxom */
+    }
+    
+    .main-nav ul {
+        gap: 8px; /* Ešte menšie medzery */
+    }
+    
+    .main-nav a {
+        font-size: 0.8rem;
+        white-space: nowrap !important; /* TVRDÝ ZÁKAZ zalamovania */
+    }
+    
+    /* Posunieme celé kategórie späť úplne hore (pod hlavičku), aby prvá fotka nebola orezaná */
     .categories-grid {
-        display: block; /* Namiesto flexboxu jednoducho bloky pod sebou */
+        display: block; 
         height: auto;
-        padding-top: 60px; /* Priestor pre header */
+        padding-top: 0px; /* Zrušené odsadenie! Fotka pôjde až po horný okraj */
     }
     
-    /* 2. Každá karta je teraz samostatný vysoký blok */
+    /* Každá karta je teraz samostatný vysoký blok */
     .category-card {
-        height: 80vh; /* Karta zaberie väčšinu výšky obrazovky, ale nechá kúsok na ďalšiu (nabáda k scrollovaniu) */
+        height: 85vh; /* Trošku vyššie karty pre epickejší vzhľad */
         width: 100%;
-        margin-bottom: 2px; /* Jemná medzera medzi kartami */
+        margin-bottom: 2px;
         display: block;
+    }
+
+    /* Úprava orezania prvej fotky pre úzke mobily */
+    .card-portrety img {
+        object-position: center top !important; /* Hlava bude vždy viditeľná, neoreže ju zhora */
     }
 
     /* 3. Obrázky na mobile - defaultne čiernobiele */
     .category-card img {
-        filter: grayscale(100%) brightness(0.6); /* Tmavšie a čiernobiele pre kontrast s textom */
+        filter: grayscale(100%) brightness(0.6); 
         transition: filter 0.8s ease, transform 1s ease;
     }
     

@@ -730,14 +730,7 @@ main {
     }
     
         /* Posunieme celé kategórie nižšie, aby fotka začínala až pod čiernou hlavičkou */
-        .categories-grid {
-            display: block; 
-            height: auto;
-            /* Výška hlavičky je cca 70px. Pridáme presne toľko margin-top (nie padding), 
-               aby sa celý grid posunul reálne nižšie */
-            margin-top: 71px; 
-            padding-top: 0;
-        }
+        .categories-grid { display: block; height: auto; margin-top: 0; padding-top: 0; }
     
     /* Každá karta je teraz samostatný vysoký blok */
     .category-card {
@@ -748,9 +741,7 @@ main {
     }
 
     /* Úprava orezania prvej fotky pre úzke mobily - toto zaručí, že hlava nie je orezaná */
-    .card-portrety img {
-        object-position: center top !important; /* Hlava bude vždy viditeľná, orezáva len spodok (ramená) */
-    }
+    .card-portrety img { object-position: center top !important; margin-top: 71px; height: calc(100% - 71px); }
 
     /* 3. Obrázky na mobile - defaultne čiernobiele */
     .category-card img {

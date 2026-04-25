@@ -671,59 +671,96 @@ main {
     }
 }
 
+/* Zabezpečenie správneho odsadenia pod fixnou priehľadnou hlavičkou */
+.main-header {
+    position: fixed; /* Fixný header */
+    background-color: rgba(26, 26, 26, 0.95); /* Tmavá polopriehľadná */
+    backdrop-filter: blur(10px);
+}
+
+.main-header.header-solid {
+    position: fixed;
+}
+
 @media (max-width: 768px) {
+    /* DOMOVSKÁ STRÁNKA NA MOBILE */
+    
+    /* 1. Header upravíme tak, aby bol pevný hore a menší */
+    .header-container {
+        padding: 0.8rem 1rem;
+    }
+    
+    /* Posunieme celé kategórie pod hlavičku, už to nie je 100vh ale viac. */
+    /* Odstránime height: 100vh, aby to mohlo voľne rásť */
     .categories-grid {
-        flex-direction: column;
+        display: block; /* Namiesto flexboxu jednoducho bloky pod sebou */
+        height: auto;
+        padding-top: 60px; /* Priestor pre header */
     }
     
+    /* 2. Každá karta je teraz samostatný vysoký blok */
+    .category-card {
+        height: 80vh; /* Karta zaberie väčšinu výšky obrazovky, ale nechá kúsok na ďalšiu (nabáda k scrollovaniu) */
+        width: 100%;
+        margin-bottom: 2px; /* Jemná medzera medzi kartami */
+        display: block;
+    }
+
+    /* 3. Obrázky na mobile - defaultne čiernobiele */
+    .category-card img {
+        filter: grayscale(100%) brightness(0.6); /* Tmavšie a čiernobiele pre kontrast s textom */
+        transition: filter 0.8s ease, transform 1s ease;
+    }
+    
+    /* Trieda 'in-view' bude pridávaná cez JavaScript, keď karta naskroluje do stredu obrazovky */
+    .category-card.in-view img {
+        filter: grayscale(0%) brightness(0.9); /* Oživenie farieb */
+        transform: scale(1.05); /* Jemný zoom */
+    }
+
+    /* 4. Overlay - minimalistický pruh vľavo dole */
+    .category-overlay {
+        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, transparent 100%);
+        align-items: flex-end; /* Text dole */
+        justify-content: flex-start; /* Text vľavo */
+        padding: 2rem 1.5rem;
+    }
+    
+    /* Skrytie boxu, robíme to minimalisticky */
     .category-btn {
-        padding: 1rem 1.5rem;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        padding: 0 !important;
+        text-align: left;
+        align-items: flex-start;
+        max-width: 100%;
+        transform: translateY(20px);
+        opacity: 0.7;
+        transition: all 0.5s ease;
     }
     
+    .category-card.in-view .category-btn {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
     .category-btn .btn-title {
-        font-size: 0.9rem;
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 300;
+        margin-bottom: 5px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
     }
     
     .category-btn .btn-desc {
-        font-size: 0.8rem;
-    }
-    
-    /* Úprava hlavičky pre mobilné zobrazenie */
-    .header-container {
-        padding: 1rem;
-        justify-content: space-between;
-    }
-    
-    /* Zmenšenie loga */
-    .logo h1 {
-        font-size: 1.1rem;
-        letter-spacing: 1px;
-    }
-    
-    .logo span {
-        font-size: 0.65rem;
-        letter-spacing: 2px;
-    }
-    
-    /* Úprava menu aby sa zmestilo vedľa loga */
-    .main-nav {
-        margin-right: 0;
-    }
-    
-    .main-nav ul {
-        gap: 12px; /* Menšie medzery medzi položkami */
-    }
-    
-    .main-nav a {
-        font-size: 0.85rem;
-        white-space: nowrap; /* ZABRÁNI ZALOMENIU "O mne" na dva riadky */
-    }
-    
-    /* Skrytie sociálnych sietí na mobile pre viac priestoru na menu */
-    .header-socials {
-        display: none;
+        color: #e0e0e0;
+        font-size: 0.95rem;
+        font-weight: 300;
     }
 }
+
 
 @media (max-width: 480px) {
     .masonry-grid-full {

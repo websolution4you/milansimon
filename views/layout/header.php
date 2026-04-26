@@ -34,4 +34,9 @@
     </div>
 </header>
 
-<main>
+<main class="<?php 
+    $main_classes = [];
+    if (isset($is_subpage)) $main_classes[] = 'subpage-main';
+    if (isset($no_padding)) $main_classes[] = 'no-padding';
+    echo implode(' ', $main_classes);
+?>">

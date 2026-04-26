@@ -29,8 +29,10 @@ if (!empty($photos)) {
 
 // Zmena hlavičky pre podstránky (aby nebola transparentná nad obrázkami ako na domovskej)
 $is_subpage = true; 
+$no_padding = true;
 require __DIR__ . '/layout/header.php'; 
 ?>
+
 
 <!-- Mozaika (Masonry Layout Full-width) -->
 <div class="portfolio-masonry-wrapper">

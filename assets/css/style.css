@@ -36,6 +36,24 @@ main {
     flex: 1;
 }
 
+.subpage-main {
+    padding-top: 80px; /* Pridá odstup pod fixným menu na podstránkach */
+}
+
+@media (max-width: 768px) {
+    .subpage-main {
+        padding-top: 110px; /* Väčšie odsadenie na mobile kvôli inému headeru */
+    }
+}
+
+
+/* Na detaile portfólia nechceme ten padding, lebo tam je tmavé pozadie a chceme full screen efekt */
+.subpage-main.no-padding {
+    padding-top: 0;
+}
+
+
+
 .container {
     width: 100%;
     max-width: 1200px;
@@ -513,8 +531,10 @@ main {
     display: flex;
     gap: 80px;
     align-items: center;
-    padding: 100px 0;
+    padding: 0 0 100px 0; /* Horný padding zmenený na 0 */
 }
+
+
 
 .about-hero-image {
     flex: 1;
@@ -616,8 +636,9 @@ main {
     background-color: var(--color-accent);
     color: white;
     padding: 80px 0;
-    margin-bottom: -60px; /* Aby to sedelo pred footrom */
+    margin-bottom: 0; /* Zmenené z -60px na 0 */
 }
+
 
 .text-center {
     text-align: center;
@@ -659,9 +680,10 @@ main {
 @media (max-width: 992px) {
     .about-hero {
         flex-direction: column;
-        padding: 60px 0;
+        padding: 0; /* Zmenené z 60px 0 na 0 */
         gap: 40px;
     }
+
     .about-hero-image {
         max-width: 100%;
     }
@@ -724,12 +746,17 @@ main {
         gap: 8px; /* Ešte menšie medzery */
     }
     
-    .main-nav a {
+        .main-nav a {
         font-size: 0.8rem;
         white-space: nowrap !important; /* TVRDÝ ZÁKAZ zalamovania */
     }
+
+    .header-socials {
+        display: none; /* Skrytie ikoniek na mobile */
+    }
     
         /* Posunieme celé kategórie nižšie, aby fotka začínala až pod čiernou hlavičkou */
+
         .categories-grid { display: block; height: auto; margin-top: 0; padding-top: 0; }
     
     /* Každá karta je teraz samostatný vysoký blok */
@@ -741,7 +768,7 @@ main {
     }
 
     /* Úprava orezania prvej fotky pre úzke mobily - toto zaručí, že hlava nie je orezaná */
-    .card-portrety img { object-position: center top !important; margin-top: 71px; height: calc(100% - 71px); }
+    .card-portrety img { object-position: center top !important; margin-top: 81px; height: calc(100% - 81px); }
 
     /* 3. Obrázky na mobile - defaultne čiernobiele */
     .category-card img {

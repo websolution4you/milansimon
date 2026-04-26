@@ -790,35 +790,37 @@ main {
             padding-bottom: 25vh; /* Posun nápisu do cca 1/3 výšky zdola */
         }
     
-        /* Skrytie boxu, robíme to minimalisticky */
+        /* Jemný podklad pre nápis na mobile */
         .category-btn {
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            backdrop-filter: none !important;
-            padding: 0 !important;
-            text-align: center; /* Text vycentrovaný */
+            background: rgba(0, 0, 0, 0.2) !important; /* Veľmi jemný tmavý podklad */
+            backdrop-filter: blur(5px); /* Rozostrenie pozadia pod nápisom */
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+            padding: 1rem 2rem !important;
+            border-radius: 4px;
+            text-align: center;
             align-items: center;
-            max-width: 100%;
+            max-width: 90%;
             transform: translateY(20px);
-            opacity: 0.7;
-            transition: all 0.5s ease;
+            opacity: 0; /* Začíname z nuly */
+            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
+        .category-card.in-view .category-btn {
+            transform: translateY(0);
+            opacity: 1;
+            background: rgba(0, 0, 0, 0.4) !important; /* Pri aktivácii mierne stmavne */
+        }
 
-    
-    .category-card.in-view .category-btn {
-        transform: translateY(0);
-        opacity: 1;
-    }
+        .category-btn .btn-title {
+            color: white;
+            font-size: 1.5rem; /* Mierne zmenšené pre lepší fit s podkladom */
+            font-weight: 300;
+            margin-bottom: 0;
+            text-shadow: none; /* Odstránený tieň, keďže máme podklad */
+            letter-spacing: 3px;
+        }
 
-    .category-btn .btn-title {
-        color: white;
-        font-size: 1.8rem;
-        font-weight: 300;
-        margin-bottom: 5px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-    }
     
     .category-btn .btn-desc {
         color: #e0e0e0;

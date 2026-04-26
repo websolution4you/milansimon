@@ -197,9 +197,10 @@ main {
     inset: 0;
     display: flex;
     justify-content: center; 
-    align-items: flex-end; /* Posunuté nadol pre desktop */
-    padding-bottom: 10vh; /* Odstup od spodného okraja */
-    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 40%); 
+        align-items: flex-end; /* Posunuté nadol pre desktop */
+    padding-bottom: 20vh; /* Zväčšený odstup od spodného okraja, aby boli tlačidlá vyššie */
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 40%);
+ 
     transition: background 0.5s ease;
     pointer-events: none;
 }
@@ -211,9 +212,10 @@ main {
     backdrop-filter: blur(10px); 
     color: white !important;
     text-decoration: none;
-    padding: 1.2rem 2.5rem; 
-    border-radius: 4px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3); 
+        padding: 1.2rem 2.5rem; 
+    border-radius: 10px; /* Zaguľatené rohy */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+ 
     transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;

@@ -782,28 +782,29 @@ main {
         transform: scale(1.05); /* Jemný zoom */
     }
 
-        /* 4. Overlay - Vycentrovaný nápis na mobile */
-    .category-overlay {
-        background: rgba(0, 0, 0, 0.3); /* Jemné stmavenie celej plochy pre čitateľnosť */
-        align-items: center; /* Vycentrovanie vertikálne */
-        justify-content: center; /* Vycentrovanie horizontálne */
-        padding: 2rem;
-    }
+        /* 4. Overlay - Nápis v 1/3 zdola na mobile */
+        .category-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+            align-items: flex-end; /* Zarovnanie nadol */
+            justify-content: center; /* Vycentrovanie horizontálne */
+            padding-bottom: 25vh; /* Posun nápisu do cca 1/3 výšky zdola */
+        }
     
-    /* Skrytie boxu, robíme to minimalisticky */
-    .category-btn {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        backdrop-filter: none !important;
-        padding: 0 !important;
-        text-align: center;
-        align-items: center;
-        max-width: 100%;
-        transform: translateY(20px);
-        opacity: 0.7;
-        transition: all 0.5s ease;
-    }
+        /* Skrytie boxu, robíme to minimalisticky */
+        .category-btn {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            padding: 0 !important;
+            text-align: center; /* Text vycentrovaný */
+            align-items: center;
+            max-width: 100%;
+            transform: translateY(20px);
+            opacity: 0.7;
+            transition: all 0.5s ease;
+        }
+
 
     
     .category-card.in-view .category-btn {

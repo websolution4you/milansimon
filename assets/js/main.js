@@ -116,5 +116,54 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Nájdeme všetky fotky v grid-e
-    const masonryItems = document.querySelectorAll('.masonry-item-full'); masonryItems.forEach(item => { observer.observe(item); }); if (window.innerWidth <= 768) { const categoryCards = document.querySelectorAll('.category-card'); if (categoryCards.length > 0) { const cardObserverOptions = { root: null, rootMargin: '-20% 0px -20% 0px', threshold: 0.1 }; const cardObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); } else { entry.target.classList.remove('in-view'); } }); }, cardObserverOptions); categoryCards.forEach(card => { cardObserver.observe(card); }); } } });
+            // Nájdeme všetky fotky v grid-e
+    const masonryItems = document.querySelectorAll('.masonry-item-full');
+    masonryItems.forEach(item => {
+        observer.observe(item);
+    });
+
+    // Sledovanie kariet kategórií pre 'in-view' efekt na mobile
+    if (window.innerWidth <= 768) {
+        const categoryCards = document.querySelectorAll('.category-card');
+        if (categoryCards.length > 0) {
+            const cardObserverOptions = {
+                root: null,
+                rootMargin: '-20% 0px -20% 0px',
+                threshold: 0.1
+            };
+
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    } else {
+                        entry.target.classList.remove('in-view');
+                    }
+                });
+            }, cardObserverOptions);
+
+            categoryCards.forEach(card => {
+                cardObserver.observe(card);
+            });
+        }
+    }
+
+    // 4. MOBILE CATEGORY CLICK LOGIC
+
+    // Na mobile chceme, aby kliknutie na celú kartu presmerovalo na kategóriu,
+    // ale len ak je karta práve v strede pohľadu (in-view), čím predídeme nechceným klikom pri scrollovaní.
+    if (window.innerWidth <= 768) {
+        const categoryCards = document.querySelectorAll('.category-card');
+        categoryCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Ak karta má triedu 'in-view', znamená to, že je aktívna
+                if (card.classList.contains('in-view')) {
+                    const link = card.querySelector('.category-btn');
+                    if (link) {
+                        window.location.href = link.href;
+                    }
+                }
+            });
+        });
+    }
+});

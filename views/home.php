@@ -16,8 +16,12 @@ function get_category_thumbnail($category) {
 <!-- Zobrazenie kategórií na domovskej stránke -->
 <section class="categories-grid">
         <div class="category-card card-portrety">
-        <img src="/assets/img/portrety/20211209101600pm.jpg" alt="Fotenie portrétov">
+        <img src="/assets/img/portrety/home_optimized.jpg" 
+             alt="Fotenie portrétov" 
+             fetchpriority="high" 
+             loading="eager">
         <div class="category-overlay">
+
             <a href="/portfolio/portrety" class="category-btn">
                 <span class="btn-title">BIZNIS PORTRÉTY</span>
             </a>

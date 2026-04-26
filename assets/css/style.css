@@ -305,9 +305,18 @@ main {
 
 @media (max-width: 768px) {
     .masonry-grid-full {
-        column-count: 2;
+        display: flex;
+        flex-direction: column; /* Na mobile idú fotky striktne pod seba v poradí */
+        column-count: auto; /* Vypneme stĺpcový výpočet */
+        gap: 4px;
+    }
+
+    .masonry-item-full {
+        width: 100%;
+        margin-bottom: 0;
     }
 }
+
 
 @media (max-width: 480px) {
     .masonry-grid-full {

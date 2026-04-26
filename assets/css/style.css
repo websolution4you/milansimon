@@ -762,12 +762,15 @@ main {
         .categories-grid { display: block; height: auto; margin-top: 0; padding-top: 0; }
     
     /* Každá karta je teraz samostatný vysoký blok */
-    .category-card {
+        .category-card {
         height: 80vh; /* Vrátené na 80vh, aby to lepšie sedelo s odsadením */
         width: 100%;
         margin-bottom: 2px;
         display: block;
+        cursor: pointer; /* Indikátor klikateľnosti */
+        -webkit-tap-highlight-color: transparent; /* Odstráni modrý záblesk pri kliknutí */
     }
+
 
     /* Úprava orezania prvej fotky pre úzke mobily - toto zaručí, že hlava nie je orezaná */
     .card-portrety img { object-position: center top !important; margin-top: 81px; height: calc(100% - 81px); }
@@ -792,14 +795,16 @@ main {
                     padding-bottom: 2rem; 
                 }
     
-                /* Tlačidlo na mobile */
+                                /* Tlačidlo na mobile */
                 .category-btn {
                     background: rgba(0, 0, 0, 0.4) !important;
                     padding: 1rem 2rem !important;
                     transform: translateY(20px);
                     opacity: 0; 
                     transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+                    pointer-events: none; /* Aby button nezachytával kliky, ktoré má riešiť celá karta */
                 }
+
 
                 .category-card.in-view .category-btn {
                     transform: translateY(0);

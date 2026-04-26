@@ -40,7 +40,13 @@ main {
     padding-top: 80px; /* Pridá odstup pod fixným menu na podstránkach */
 }
 
+/* Pre tmavé podstránky (portfólio detail) zmeníme farbu pozadia main-u na čiernu */
+.subpage-dark {
+    background-color: #111111;
+}
+
 @media (max-width: 768px) {
+
     .subpage-main {
         padding-top: 110px; /* Väčšie odsadenie na mobile kvôli inému headeru */
     }

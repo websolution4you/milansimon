@@ -38,5 +38,6 @@
     $main_classes = [];
     if (isset($is_subpage)) $main_classes[] = 'subpage-main';
     if (isset($no_padding)) $main_classes[] = 'no-padding';
+    if (isset($is_dark_subpage)) $main_classes[] = 'subpage-dark';
     echo implode(' ', $main_classes);
 ?>">

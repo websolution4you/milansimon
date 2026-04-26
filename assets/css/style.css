@@ -782,13 +782,14 @@ main {
         transform: scale(1.05); /* Jemný zoom */
     }
 
-        /* 4. Overlay - Nápis v 1/3 zdola na mobile */
+                /* 4. Overlay - Nápis v spodnej časti na mobile */
         .category-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 40%);
             align-items: flex-end; /* Zarovnanie nadol */
             justify-content: center; /* Vycentrovanie horizontálne */
-            padding-bottom: 25vh; /* Posun nápisu do cca 1/3 výšky zdola */
+            padding-bottom: 2rem; /* Posun nápisu nižšie k okraju */
         }
+
     
         /* Jemný podklad pre nápis na mobile */
         .category-btn {

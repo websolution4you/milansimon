@@ -279,7 +279,7 @@ main {
 
 .floating-back-btn {
     position: absolute;
-    top: 20px;
+    top: 100px; /* Posunuté nižšie, aby tlačidlo nebolo pod fixným menu */
     left: 20px;
     z-index: 10;
     background-color: rgba(0, 0, 0, 0.6);
@@ -294,6 +294,13 @@ main {
     backdrop-filter: blur(5px);
     transition: background-color 0.3s ease;
 }
+
+@media (max-width: 768px) {
+    .floating-back-btn {
+        top: 120px; /* Na mobile ešte o niečo nižšie kvôli vyššiemu headeru */
+    }
+}
+
 
 .floating-back-btn:hover {
     background-color: var(--color-accent);

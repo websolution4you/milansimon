@@ -197,24 +197,25 @@ main {
     inset: 0;
     display: flex;
     justify-content: center; 
-    align-items: center; 
-    background: rgba(0, 0, 0, 0.4); 
-    transition: background 0.5s ease; /* Pridáme transition pre overlay */
-    pointer-events: none; /* Aby sme pri hoveri nad celým panelom nespustili len button, ale reagoval celý panel */
+    align-items: flex-end; /* Posunuté nadol pre desktop */
+    padding-bottom: 10vh; /* Odstup od spodného okraja */
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 40%); 
+    transition: background 0.5s ease;
+    pointer-events: none;
 }
 
-/* Tlačidlo - aktualizovaný dizajn pre desktop (inšpirované mobilnou verziou) */
+/* Tlačidlo - zjednotený tmavý dizajn pre desktop aj mobil */
 .category-btn {
     pointer-events: auto;
-    background-color: rgba(255, 255, 255, 0.85); /* Svetlejší podklad podľa screenshotu */
+    background-color: rgba(0, 0, 0, 0.4) !important;
     backdrop-filter: blur(10px); 
-    color: #111111;
+    color: white !important;
     text-decoration: none;
     padding: 1.2rem 2.5rem; 
-    border-radius: 4px; /* Hranatejší dizajn podľa screenshotu */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3); 
     transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -223,26 +224,27 @@ main {
 
 .category-btn .btn-title {
     font-family: var(--font-heading);
-    font-weight: 500;
-    font-size: 0.9rem;
-    letter-spacing: 3px;
+    font-weight: 300;
+    font-size: 1.1rem;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    color: #111111;
+    color: white;
 }
 
 .category-btn .btn-desc {
-    display: none; /* Skryjeme popis na desktope pre čistejší vzhľad podľa screenshotu */
+    display: none; 
 }
 
 .category-btn:hover {
-    background-color: #ffffff;
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .category-btn:hover .btn-title {
-    color: #000000;
+    color: white;
 }
+
 
 
 /* Hover efekt na CELÝ PANEL (kategóriu) */
@@ -778,45 +780,32 @@ main {
         transform: scale(1.05); /* Jemný zoom */
     }
 
-                /* 4. Overlay - Nápis v spodnej časti na mobile */
-        .category-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 40%);
-            align-items: flex-end; /* Zarovnanie nadol */
-            justify-content: center; /* Vycentrovanie horizontálne */
-            padding-bottom: 2rem; /* Posun nápisu nižšie k okraju */
-        }
-
+                /* 4. Overlay - Mobile style (overriding desktop) */
+                .category-overlay {
+                    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 40%);
+                    align-items: flex-end; 
+                    justify-content: center; 
+                    padding-bottom: 2rem; 
+                }
     
-        /* Jemný podklad pre nápis na mobile */
-        .category-btn {
-            background: rgba(0, 0, 0, 0.2) !important; /* Veľmi jemný tmavý podklad */
-            backdrop-filter: blur(5px); /* Rozostrenie pozadia pod nápisom */
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-            padding: 1rem 2rem !important;
-            border-radius: 4px;
-            text-align: center;
-            align-items: center;
-            max-width: 90%;
-            transform: translateY(20px);
-            opacity: 0; /* Začíname z nuly */
-            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
+                /* Tlačidlo na mobile */
+                .category-btn {
+                    background: rgba(0, 0, 0, 0.4) !important;
+                    padding: 1rem 2rem !important;
+                    transform: translateY(20px);
+                    opacity: 0; 
+                    transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+                }
 
-        .category-card.in-view .category-btn {
-            transform: translateY(0);
-            opacity: 1;
-            background: rgba(0, 0, 0, 0.4) !important; /* Pri aktivácii mierne stmavne */
-        }
+                .category-card.in-view .category-btn {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
 
-        .category-btn .btn-title {
-            color: white;
-            font-size: 1.5rem; /* Mierne zmenšené pre lepší fit s podkladom */
-            font-weight: 300;
-            margin-bottom: 0;
-            text-shadow: none; /* Odstránený tieň, keďže máme podklad */
-            letter-spacing: 3px;
-        }
+                .category-btn .btn-title {
+                    font-size: 1.3rem; 
+                }
+
 
     
     .category-btn .btn-desc {

@@ -267,7 +267,9 @@ main {
     background-color: #111111; /* Veľmi tmavé pozadie pre mikro-medzery */
     position: relative; /* Dôležité pre absolútne pozicovanie tlačidla späť */
     padding: 4px; /* Okraj okolo celej mriežky */
+    min-height: 100vh;
 }
+
 
 .floating-back-btn {
     position: absolute;

@@ -1,0 +1,1060 @@
+/* Reset a premenné */
+:root {
+    --color-bg: #ffffff;
+    --color-text: #333333;
+    --color-text-light: #777777;
+    --color-accent: #2c5f5d; /* Tmavá zelená inšpirovaná pbphoto.sk */
+    --color-accent-light: #528c89;
+    --color-border: #eeeeee;
+    
+    --font-heading: 'Montserrat', sans-serif; /* Prémiový, širší font */
+    --font-body: 'Lato', sans-serif; /* Čistý, ľahko čitateľný text */
+    
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 4rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+.subpage-main {
+    padding-top: 80px; /* Pridá odstup pod fixným menu na podstránkach */
+}
+
+/* Pre tmavé podstránky (portfólio detail) zmeníme farbu pozadia main-u na čiernu */
+.subpage-dark {
+    background-color: #111111;
+}
+
+@media (max-width: 768px) {
+
+    .subpage-main {
+        padding-top: 110px; /* Väčšie odsadenie na mobile kvôli inému headeru */
+    }
+}
+
+
+/* Na detaile portfólia nechceme ten padding, lebo tam je tmavé pozadie a chceme full screen efekt */
+.subpage-main.no-padding {
+    padding-top: 0;
+}
+
+
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* Hlavička a Navigácia */
+.main-header {
+    background-color: transparent; /* Priehľadná hlavička podľa vzoru */
+    position: absolute; /* Aby išla cez obrázky, nie nad nimi */
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    border-bottom: none; /* Zrušený border */
+}
+
+/* Modifikátor pre podstránky, kde chceme tmavé pozadie hlavičky, aby bola čitateľná */
+.main-header.header-solid {
+    position: relative;
+    background-color: #1a1a1a;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) 3rem; /* Zväčšený pevný padding pre okraje */
+    max-width: 100%; 
+    margin: 0;
+    width: 100%;
+}
+
+.logo {
+    text-decoration: none;
+    color: white; /* Biely text loga na tmavej fotke */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Pre lepšiu čitateľnosť */
+}
+
+.logo h1 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    color: #e0e0e0;
+}
+
+.main-nav {
+    margin-left: auto; 
+    margin-right: 2rem; 
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: white; /* Biele linky */
+    font-family: var(--font-heading); /* Pre menu použijeme tiež Montserrat pre jednotnosť */
+    font-weight: 300; /* Tenší font podľa obrázka */
+    font-size: 0.95rem; 
+    letter-spacing: 1px; /* Jemná medzera */
+    text-transform: none; /* Normálne začiatočné veľké písmená, nie všetko UPPERCASE */
+    transition: color 0.3s ease;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.main-nav a:hover {
+    color: #cccccc;
+}
+
+.header-socials {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.header-socials a {
+    color: white; /* Biele ikonky */
+    transition: color 0.3s ease;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.header-socials a:hover {
+    color: #cccccc;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Kategórie Portfólia - Úvod (Karty) */
+.categories-grid {
+    display: flex;
+    width: 100%;
+    height: 100vh; /* Roztiahnuté na CELÚ výšku obrazovky, presne podľa obrázku */
+    margin: 0;
+    padding: 0;
+}
+
+.category-card {
+    position: relative;
+    overflow: hidden;
+    flex: 1; /* Každá karta rovnako široká */
+    height: 100%; 
+    display: block;
+}
+
+.category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    filter: grayscale(20%) contrast(90%); 
+    transition: filter 0.5s ease; 
+}
+
+.card-portrety img {
+    object-position: center 15%; /* Posunie fotku nižšie, aby hlava nebola úplne hore */
+}
+
+/* Zrušený HACK pre posun hlavy, pretože to robilo čierne okraje. Vrátené do pôvodného stavu. */
+
+.category-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center; 
+        align-items: flex-end; /* Posunuté nadol pre desktop */
+    padding-bottom: 20vh; /* Zväčšený odstup od spodného okraja, aby boli tlačidlá vyššie */
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 40%);
+ 
+    transition: background 0.5s ease;
+    pointer-events: none;
+}
+
+/* Tlačidlo - zjednotený tmavý dizajn pre desktop aj mobil */
+.category-btn {
+    pointer-events: auto;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(10px); 
+    color: white !important;
+    text-decoration: none;
+    padding: 1.2rem 2.5rem; 
+    border-radius: 10px; /* Zaguľatené rohy */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3); 
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transform: translateY(0); /* Reset transformácie pre desktop */
+    opacity: 1; /* Reset opacity pre desktop */
+}
+
+
+.category-btn .btn-title {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.category-btn .btn-desc {
+    display: none; 
+}
+
+.category-btn:hover {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.category-btn:hover .btn-title {
+    color: white;
+}
+
+
+
+/* Hover efekt na CELÝ PANEL (kategóriu) */
+.category-card:hover img {
+    filter: grayscale(0%) contrast(105%); /* Fotka sa rozžiari do plných farieb */
+}
+
+.category-card:hover .category-overlay {
+    background: rgba(0, 0, 0, 0.1); /* Tmavý filter takmer úplne zmizne */
+}
+
+/* Mozaika Portfólia - Nový dizajn podľa referencie */
+
+.portfolio-masonry-wrapper {
+    width: 100%;
+    background-color: #111111; /* Veľmi tmavé pozadie pre mikro-medzery */
+    position: relative; /* Dôležité pre absolútne pozicovanie tlačidla späť */
+    padding: 4px; /* Okraj okolo celej mriežky */
+    min-height: 100vh;
+}
+
+
+.floating-back-btn {
+    position: absolute;
+    top: 100px; /* Posunuté nižšie, aby tlačidlo nebolo pod fixným menu */
+    left: 20px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    backdrop-filter: blur(5px);
+    transition: background-color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .floating-back-btn {
+        top: 120px; /* Na mobile ešte o niečo nižšie kvôli vyššiemu headeru */
+    }
+}
+
+
+.floating-back-btn:hover {
+    background-color: var(--color-accent);
+}
+
+.masonry-grid-full {
+    column-count: 4; /* Viac stĺpcov ako pôvodne (3) */
+    column-gap: 4px; /* 3. Mikro-medzera medzi stĺpcami */
+    padding: 0;
+}
+
+@media (max-width: 1200px) {
+    .masonry-grid-full {
+        column-count: 3;
+    }
+}
+
+@media (max-width: 768px) {
+    .masonry-grid-full {
+        column-count: 2;
+    }
+}
+
+
+
+@media (max-width: 480px) {
+    .masonry-grid-full {
+        column-count: 1;
+    }
+}
+
+.masonry-item-full {
+    break-inside: avoid;
+    margin-bottom: 4px; /* 3. Mikro-medzera vertikálne */
+    position: relative;
+    overflow: hidden;
+    cursor: pointer; /* Indikátor, že sa dá na fotku kliknúť */
+    /* Nástupná animácia (teraz cez JS Intersection Observer pre spoľahlivosť) */
+    opacity: 0; 
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.masonry-item-full.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.masonry-item-full img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
+    /* 4. Čiernobielo-stmavený základ - trochu zjemnený na 50%, aby to nebolo úplne bez farieb */
+    filter: grayscale(50%) brightness(0.8);
+}
+
+.masonry-item-full:hover img {
+    transform: scale(1.03); /* Jemný zoom na hover */
+    /* 4. Plné oživenie farieb na hover */
+    filter: grayscale(0%) brightness(1.05); 
+}
+
+/* 1. LIGHTBOX (Zväčšovacie okno) */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    border-radius: 4px;
+    transform: scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.lightbox-overlay.active .lightbox-img {
+    transform: scale(1);
+}
+
+.lightbox-close, .lightbox-prev, .lightbox-next {
+    position: absolute;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 2001;
+    padding: 20px;
+}
+
+.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.lightbox-close { top: 20px; right: 20px; }
+.lightbox-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+.lightbox-next { right: 20px; top: 50%; transform: translateY(-50%); }
+
+.lightbox-prev:hover { transform: translateY(-50%) scale(1.2); }
+.lightbox-next:hover { transform: translateY(-50%) scale(1.2); }
+
+/* Prekrývací text na fotkách (voliteľné, ak by sme chceli napr. názvy eventov) */
+.masonry-item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    padding: 20px;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.masonry-item-full:hover .masonry-item-overlay {
+    opacity: 1;
+}
+
+.masonry-item-overlay h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+
+/* Pätička */
+.main-footer {
+    background-color: #fafafa;
+    border-top: 1px solid var(--color-border);
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.footer-links a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    margin: 0 var(--spacing-sm);
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--color-accent);
+}
+
+/* Formulár */
+.contact-form {
+    max-width: 600px;
+    margin: var(--spacing-xl) auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-row {
+    display: flex;
+    gap: var(--spacing-md);
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+}
+
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.btn-submit {
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: var(--color-accent-light);
+}
+
+/* O mne sekcia - Nový dizajn */
+.about-hero {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+    padding: 0 0 100px 0; /* Horný padding zmenený na 0 */
+}
+
+
+
+.about-hero-image {
+    flex: 1;
+    position: relative;
+    max-width: 50%;
+}
+
+.about-hero-image img {
+    width: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: block;
+    /* Rám je teraz priamo súčasťou obrázka, neposúva sa pri zmene veľkosti okna */
+    border: 3px solid var(--color-accent);
+    padding: 15px; /* Priestor medzi fotkou a rámikom (tzv. pasparta) */
+    background-color: white; /* Farba pasparty */
+}
+
+.about-hero-text {
+    flex: 1;
+}
+
+.about-subtitle {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.about-hero-text h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+    color: #111;
+    line-height: 1.2;
+}
+
+.about-hero-text p {
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    color: #555;
+}
+
+.about-signature {
+    font-family: 'Playfair Display', serif; /* Ak tento font zostal, inak sa aplikuje fallback */
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--color-text-light);
+    margin-top: 40px;
+}
+
+/* O mne - Ikonky / Vlastnosti */
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding: 0 0 100px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.feature-box {
+    text-align: center;
+    padding: 30px;
+    background: #fafafa;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+}
+
+.feature-box h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.feature-box p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Call to Action pre O mne / Všeobecné */
+.about-cta {
+    background-color: var(--color-accent);
+    color: white;
+    padding: 80px 0;
+    margin-bottom: 0; /* Zmenené z -60px na 0 */
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+.about-cta h2 {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.about-cta p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: white;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 15px 40px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #111;
+    color: white;
+}
+
+/* Responzivita aktualizovaná */
+@media (max-width: 992px) {
+    .about-hero {
+        flex-direction: column;
+        padding: 0; /* Zmenené z 60px 0 na 0 */
+        gap: 40px;
+    }
+
+    .about-hero-image {
+        max-width: 100%;
+    }
+    .about-features {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Zabezpečenie správneho odsadenia pod fixnou priehľadnou hlavičkou */
+.main-header {
+    position: absolute; /* Vrátené na absolute pre desktop, aby bola priehľadná cez obrázok */
+    background-color: transparent;
+    backdrop-filter: none;
+}
+
+.main-header.header-solid {
+    position: relative;
+    background-color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+    /* Na mobile potrebujeme fixnú hlavičku, inak sa kategórie pri scrollovaní dostanú pod ňu */
+    .main-header {
+        position: fixed;
+        background-color: rgba(26, 26, 26, 0.95); /* Vrátené plné tmavé pozadie */
+        backdrop-filter: blur(10px);
+    }
+    
+    .main-header.header-solid {
+        position: fixed;
+        background-color: rgba(26, 26, 26, 0.95);
+    }
+    
+    /* DOMOVSKÁ STRÁNKA NA MOBILE */
+    
+    /* 1. Header upravíme tak, aby bol pevný hore a menší */
+    .header-container {
+        padding: 1rem 0.5rem; /* Zmenšené okraje, aby bolo viac miesta pre menu */
+    }
+    
+    /* Zmenšenie loga, aby nebralo toľko šírky */
+    .logo h1 {
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .logo span {
+        font-size: 0.55rem;
+        letter-spacing: 1.5px;
+    }
+    
+    /* Úprava menu aby sa stopercentne zmestilo a nezalomilo */
+    .main-nav {
+        margin-right: 0;
+        flex-shrink: 0; /* Zabráni stlačeniu flexboxom */
+    }
+    
+    .main-nav ul {
+        gap: 8px; /* Ešte menšie medzery */
+    }
+    
+        .main-nav a {
+        font-size: 0.8rem;
+        white-space: nowrap !important; /* TVRDÝ ZÁKAZ zalamovania */
+    }
+
+    .header-socials {
+        display: none; /* Skrytie ikoniek na mobile */
+    }
+    
+        /* Posunieme celé kategórie nižšie, aby fotka začínala až pod čiernou hlavičkou */
+
+        .categories-grid { display: block; height: auto; margin-top: 0; padding-top: 0; }
+    
+    /* Každá karta je teraz samostatný vysoký blok */
+        .category-card {
+        height: 80vh; /* Vrátené na 80vh, aby to lepšie sedelo s odsadením */
+        width: 100%;
+        margin-bottom: 2px;
+        display: block;
+        cursor: pointer; /* Indikátor klikateľnosti */
+        -webkit-tap-highlight-color: transparent; /* Odstráni modrý záblesk pri kliknutí */
+    }
+
+
+    /* Úprava orezania prvej fotky pre úzke mobily - toto zaručí, že hlava nie je orezaná */
+    .card-portrety img { object-position: center top !important; margin-top: 81px; height: calc(100% - 81px); }
+
+    /* 3. Obrázky na mobile - defaultne čiernobiele */
+    .category-card img {
+        filter: grayscale(100%) brightness(0.6); 
+        transition: filter 0.8s ease, transform 1s ease;
+    }
+    
+    /* Trieda 'in-view' bude pridávaná cez JavaScript, keď karta naskroluje do stredu obrazovky */
+    .category-card.in-view img {
+        filter: grayscale(0%) brightness(0.9); /* Oživenie farieb */
+        transform: scale(1.05); /* Jemný zoom */
+    }
+
+                /* 4. Overlay - Mobile style (overriding desktop) */
+                .category-overlay {
+                    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 40%);
+                    align-items: flex-end; 
+                    justify-content: center; 
+                    padding-bottom: 2rem; 
+                }
+    
+                                /* Tlačidlo na mobile */
+                .category-btn {
+                    background: rgba(0, 0, 0, 0.4) !important;
+                    padding: 1rem 2rem !important;
+                    transform: translateY(20px);
+                    opacity: 0; 
+                    transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+                    pointer-events: none; /* Aby button nezachytával kliky, ktoré má riešiť celá karta */
+                }
+
+
+                .category-card.in-view .category-btn {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+
+                .category-btn .btn-title {
+                    font-size: 1.3rem; 
+                }
+
+
+    
+    .category-btn .btn-desc {
+        color: #e0e0e0;
+        font-size: 0.95rem;
+        font-weight: 300;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .masonry-grid-full {
+        column-count: 1;
+    }
+}
+
+
+
+/* ROZŠÍRITEĽNÝ FOOTER (PETER BRICHTA ŠTÝL) */
+.main-footer {
+    position: fixed;
+    bottom: -600px; /* Dostatočne hlboko, aby bol skrytý */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    color: #333;
+    padding: 60px 0 40px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+    text-align: left;
+    border-top: none;
+    /* Dôležité: posúvame footer transformáciou, je to plynulejšie a istejšie ako meniť bottom */
+}
+
+.footer-toggle-btn {
+    position: absolute; /* Teraz absolútne voči footru */
+    top: -40px; /* Trčí nad footrom */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-accent);
+    color: white;
+    width: 60px;
+    height: 40px;
+    border: none;
+    border-radius: 20px 20px 0 0;
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+}
+
+.footer-toggle-btn i {
+    font-size: 1.2rem;
+    transition: transform 0.4s ease;
+}
+
+/* Keď je footer otvorený - JS pridá triedu na body */
+body.footer-open .main-footer {
+    /* Transformácia prebehne v JS, ale toto je fallback, keby sme to robili cez CSS */
+}
+
+body.footer-open .footer-toggle-btn {
+    background-color: #666; /* Zmena farby pri zatváraní */
+    /* Odstránené preklápanie border-radiusu, nech je to stále taký "jazýček" */
+}
+
+body.footer-open .footer-toggle-btn i {
+    transform: rotate(180deg);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+.footer-col h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.footer-col p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer-col .logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.footer-socials-large {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.footer-socials-large a {
+    color: #333;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.footer-socials-large a:hover {
+    color: var(--color-accent);
+}
+
+.footer-bottom-text {
+    margin-top: 40px;
+    color: #999;
+    font-size: 0.8rem;
+}
+
+.footer-links-list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links-list li {
+    margin-bottom: 10px;
+}
+
+.footer-links-list a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.footer-links-list a:hover {
+    color: var(--color-accent);
+}
+
+.footer-link-more {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--color-accent-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* TESTOVACIE MENU STYLY */
+.test-menu-container {
+    padding: 100px 50px;
+    background: #1a1a1a; /* Tmavé pozadie aby biely text vynikol */
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.test-menu-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+}
+
+.test-menu-item span {
+    color: #666;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.test-nav {
+    display: flex;
+    gap: 30px;
+}
+
+.test-nav a {
+    text-decoration: none;
+    color: white;
+}
+
+/* 1. Montserrat Thin (Current) */
+.m-1 a { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 1rem; letter-spacing: 2px; }
+
+/* 2. Montserrat Bold */
+.m-2 a { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
+
+/* 3. Playfair Display */
+.m-3 a { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 1.1rem; letter-spacing: 1px; }
+
+/* 4. Playfair Display Italic */
+.m-4 a { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; font-size: 1.1rem; }
+
+/* 5. Cormorant Garamond */
+.m-5 a { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase; }
+
+/* 6. Raleway Light */
+.m-6 a { font-family: 'Raleway', sans-serif; font-weight: 200; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; }
+
+/* 7. Poppins Regular */
+.m-7 a { font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 0.95rem; letter-spacing: 0.5px; }
+
+/* 8. Lora */
+.m-8 a { font-family: 'Lora', serif; font-weight: 400; font-size: 1rem; }
+
+/* 9. Inter Extra Light */
+.m-9 a { font-family: 'Inter', sans-serif; font-weight: 200; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; }
+
+/* 10. Bodoni Moda */
+.m-10 a { font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: 1.1rem; letter-spacing: 1px; }
+
+/* 11. Oswald Light */
+.m-11 a { font-family: 'Oswald', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; }
+
+/* 12. Quicksand */
+.m-12 a { font-family: 'Quicksand', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 1px; }
+
+/* 13. Montserrat Semi-Bold All Caps */
+.m-13 a { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; }

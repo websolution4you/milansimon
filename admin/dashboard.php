@@ -13,38 +13,52 @@ if (!is_dir($upload_dir)) {
     mkdir($upload_dir, 0755, true);
 }
 
-// Spracovanie nahrania fotky
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['photo'])) {
+// Spracovanie nahrania fotiek (podpora viacerých súborov)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['photos'])) {
     $category = $_POST['category'] ?? '';
-    $file = $_FILES['photo'];
+    $files = $_FILES['photos'];
+    $success_count = 0;
+    $errors = [];
 
-    if ($file['error'] === 0) {
-        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-        $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp'];
-        
-        if (in_array($extension, $allowed_extensions)) {
-            $filename = uniqid('img_') . '.' . $extension;
-            $destination = $upload_dir . $filename;
-            
-            if (move_uploaded_file($file['tmp_name'], $destination)) {
-                // Uložíme relatívnu cestu k súboru (z pohľadu koreňa projektu)
-                $db_path = '/img/' . $filename;
+    if (is_array($files['name'])) {
+        $count = count($files['name']);
+        for ($i = 0; $i < $count; $i++) {
+            if ($files['error'][$i] === 0) {
+                $extension = strtolower(pathinfo($files['name'][$i], PATHINFO_EXTENSION));
+                $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp'];
                 
-                // Získanie najvyššieho poradia v danej kategórii
-                $stmtOrder = $pdo->prepare('SELECT MAX(sort_order) as max_order FROM photos WHERE category = ?');
-                $stmtOrder->execute([$category]);
-                $rowOrder = $stmtOrder->fetch();
-                $next_order = ($rowOrder && $rowOrder['max_order'] > 0) ? $rowOrder['max_order'] + 1 : 1;
-                
-                $stmt = $pdo->prepare('INSERT INTO photos (category, s3_url, sort_order) VALUES (?, ?, ?)');
-                $stmt->execute([$category, $db_path, $next_order]);
-                $message = '<div class="success">Fotka bola úspešne nahraná na server (Poradie: ' . $next_order . ')!</div>';
-            } else {
-                $message = '<div class="error">Chyba pri ukladaní súboru na server. Skontrolujte práva pre adresár /img.</div>';
+                if (in_array($extension, $allowed_extensions)) {
+                    $filename = uniqid('img_') . '.' . $extension;
+                    $destination = $upload_dir . $filename;
+                    
+                    if (move_uploaded_file($files['tmp_name'][$i], $destination)) {
+                        $db_path = '/img/' . $filename;
+                        
+                        $stmtOrder = $pdo->prepare('SELECT MAX(sort_order) as max_order FROM photos WHERE category = ?');
+                        $stmtOrder->execute([$category]);
+                        $rowOrder = $stmtOrder->fetch();
+                        $next_order = ($rowOrder && $rowOrder['max_order'] > 0) ? $rowOrder['max_order'] + 1 : 1;
+                        
+                        $stmt = $pdo->prepare('INSERT INTO photos (category, s3_url, sort_order) VALUES (?, ?, ?)');
+                        $stmt->execute([$category, $db_path, $next_order]);
+                        $success_count++;
+                    } else {
+                        $errors[] = "Chyba pri ukladaní: " . htmlspecialchars($files['name'][$i]);
+                    }
+                } else {
+                    $errors[] = "Nepodporovaný formát: " . htmlspecialchars($files['name'][$i]);
+                }
+            } elseif ($files['error'][$i] !== 4) { // 4 = UPLOAD_ERR_NO_FILE
+                $errors[] = "Chyba pri nahrávaní " . htmlspecialchars($files['name'][$i]) . " (kód: " . $files['error'][$i] . ")";
             }
-        } else {
-            $message = '<div class="error">Nepodporovaný formát súboru. Povolené sú: JPG, PNG, WEBP.</div>';
         }
+    }
+
+    if ($success_count > 0) {
+        $message = '<div class="success">Úspešne nahraných ' . $success_count . ' fotiek!</div>';
+    }
+    if (!empty($errors)) {
+        $message .= '<div class="error">' . implode('<br>', $errors) . '</div>';
     }
 }
 
@@ -155,7 +169,7 @@ $photos = $pdo->query("SELECT * FROM photos ORDER BY FIELD(category, 'portrety',
                     <option value="sport">Reklama a Šport</option>
                     <option value="eventy">Eventy</option>
                 </select>
-                <input type="file" name="photo" accept="image/*" required>
+                <input type="file" name="photos[]" accept="image/*" multiple required>
                 <button type="submit"><i class="fas fa-cloud-upload-alt"></i> NAHRAŤ NA SERVER</button>
             </form>
         </div>

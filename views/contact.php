@@ -40,7 +40,7 @@ require __DIR__ . '/layout/header.php';
     <!-- Sekcia s formulárom -->
     <section style="padding: 60px 0 120px 0; border-top: 1px solid var(--color-border);">
         <div class="text-center" style="margin-bottom: 40px;">
-            <h2 style="font-family: var(--font-heading); font-weight: 300; font-size: 2.2rem; color: var(--color-accent);">Napíšte mi správu</h2>
+            <h2 style="font-family: var(--font-heading); font-weight: 300; font-size: 2.2rem; color: #111111;">Napíšte mi správu</h2>
         </div>
 
         <form class="contact-form" action="#" method="POST">

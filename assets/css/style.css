@@ -555,7 +555,7 @@ main {
 }
 
 .btn-submit {
-    background-color: var(--color-accent);
+    background-color: #111111;
     color: white;
     border: none;
     padding: var(--spacing-md) var(--spacing-lg);
@@ -569,7 +569,7 @@ main {
 }
 
 .btn-submit:hover {
-    background-color: var(--color-accent-light);
+    background-color: #333333;
 }
 
 .about-hero {

@@ -84,8 +84,8 @@ require __DIR__ . '/layout/header.php';
         </div>
 
         <?php if (!empty($success_message)): ?>
-            <div class="alert alert-success" style="max-width: 600px; margin: 0 auto 30px auto; padding: 20px; background-color: rgba(44, 95, 93, 0.1); border: 1px solid var(--color-accent); border-radius: 8px; color: var(--color-accent); font-family: var(--font-body); display: flex; align-items: center; gap: 15px;">
-                <i class="fas fa-check-circle" style="font-size: 1.5rem;"></i>
+            <div class="alert alert-success" style="max-width: 600px; margin: 0 auto 30px auto; padding: 20px; background-color: #f7f7f7; border: 1px solid #dddddd; border-radius: 8px; color: #111111; font-family: var(--font-body); display: flex; align-items: center; gap: 15px;">
+                <i class="fas fa-check-circle" style="font-size: 1.5rem; color: #111111;"></i>
                 <div><?php echo htmlspecialchars($success_message); ?></div>
             </div>
         <?php endif; ?>

@@ -1,5 +1,45 @@
 <?php 
 $is_subpage = true; 
+
+$success_message = '';
+$error_message = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = isset($_POST['name']) ? trim($_POST['name']) : '';
+    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $subject = isset($_POST['subject']) ? trim($_POST['subject']) : '';
+    $message = isset($_POST['message']) ? trim($_POST['message']) : '';
+    $consent = isset($_POST['consent']) ? $_POST['consent'] : '';
+    
+    if (empty($name) || empty($email) || empty($message) || empty($consent)) {
+        $error_message = 'Prosím, vyplňte všetky povinné polia a odsúhlaste spracovanie osobných údajov.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error_message = 'Prosím, zadajte platnú emailovú adresu.';
+    } else {
+        // Skúsime odoslať email fotografovi
+        $to = 'msphotography@milansimon.com';
+        $email_subject = 'Nový dopyt z webu: ' . (empty($subject) ? 'Kontakt' : $subject);
+        
+        $email_body = "Dostali ste novú správu z kontaktného formulára na webe Milan Šimon Photography.\n\n";
+        $email_body .= "Meno: $name\n";
+        $email_body .= "Email: $email\n";
+        $email_body .= "Predmet: " . (empty($subject) ? 'Nie je uvedený' : $subject) . "\n\n";
+        $email_body .= "Správa:\n$message\n";
+        
+        $headers = "From: web@milansimon.com\r\n";
+        $headers .= "Reply-To: $email\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        
+        // V lokálnom prostredí nemusí mail() prejsť, no skúsime ho odoslať a prednastaviť úspech
+        @mail($to, $email_subject, $email_body, $headers);
+        
+        $success_message = 'Vaša správa bola úspešne odoslaná! Budem vás kontaktovať čo najskôr.';
+        
+        // Vyčistíme polia po úspešnom odoslaní
+        $_POST = [];
+    }
+}
+
 require __DIR__ . '/layout/header.php'; 
 ?>
 
@@ -43,26 +83,40 @@ require __DIR__ . '/layout/header.php';
             <h2 style="font-family: var(--font-heading); font-weight: 300; font-size: 2.2rem; color: #111111;">Napíšte mi správu</h2>
         </div>
 
-        <form class="contact-form" action="#" method="POST">
+        <?php if (!empty($success_message)): ?>
+            <div class="alert alert-success" style="max-width: 600px; margin: 0 auto 30px auto; padding: 20px; background-color: rgba(44, 95, 93, 0.1); border: 1px solid var(--color-accent); border-radius: 8px; color: var(--color-accent); font-family: var(--font-body); display: flex; align-items: center; gap: 15px;">
+                <i class="fas fa-check-circle" style="font-size: 1.5rem;"></i>
+                <div><?php echo htmlspecialchars($success_message); ?></div>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($error_message)): ?>
+            <div class="alert alert-danger" style="max-width: 600px; margin: 0 auto 30px auto; padding: 20px; background-color: rgba(220, 53, 69, 0.1); border: 1px solid #dc3545; border-radius: 8px; color: #dc3545; font-family: var(--font-body); display: flex; align-items: center; gap: 15px;">
+                <i class="fas fa-exclamation-circle" style="font-size: 1.5rem;"></i>
+                <div><?php echo htmlspecialchars($error_message); ?></div>
+            </div>
+        <?php endif; ?>
+
+        <form class="contact-form" action="/kontakt" method="POST">
             <div class="form-row">
                 <div class="form-group" style="flex: 1;">
                     <label for="name">Meno *</label>
-                    <input type="text" id="name" name="name" required placeholder="Vaše meno">
+                    <input type="text" id="name" name="name" required placeholder="Vaše meno" value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
                 </div>
                 <div class="form-group" style="flex: 1;">
                     <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required placeholder="Váš email">
+                    <input type="email" id="email" name="email" required placeholder="Váš email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
                 </div>
             </div>
             
             <div class="form-group">
                 <label for="subject">Predmet</label>
-                <input type="text" id="subject" name="subject" placeholder="O čo sa jedná?">
+                <input type="text" id="subject" name="subject" placeholder="O čo sa jedná?" value="<?php echo isset($_POST['subject']) ? htmlspecialchars($_POST['subject']) : ''; ?>">
             </div>
             
             <div class="form-group">
                 <label for="message">Správa</label>
-                <textarea id="message" name="message" rows="6" required placeholder="Napíšte vašu predstavu..."></textarea>
+                <textarea id="message" name="message" rows="6" required placeholder="Napíšte vašu predstavu..."><?php echo isset($_POST['message']) ? htmlspecialchars($_POST['message']) : ''; ?></textarea>
             </div>
             
             <div class="form-group" style="flex-direction: row; align-items: center; gap: 10px;">

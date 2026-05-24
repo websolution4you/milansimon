@@ -10,16 +10,11 @@ require __DIR__ . '/layout/header.php';
             <img src="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=800&q=80" alt="Kontaktujte ma">
         </div>
         <div class="about-hero-text">
-            <span class="about-subtitle">Kontakt</span>
             <h2>Napíšte mi a dohodneme si fotenie.</h2>
             
             <p>Zaujalo vás niektoré z portfólií alebo hľadáte fotografa na konkrétnu spoluprácu? Či už ide o biznis portrét, event alebo reklamnú kampaň, rád s vami preberiem vaše predstavy.</p>
             
             <p>Snažím sa odpovedať na všetky dopyty do 24 hodín. Ak preferujete telefonický kontakt, neváhajte mi zavolať.</p>
-            
-            <div class="about-signature" style="font-size: 1.5rem; margin-top: 20px;">
-                Milan Šimon
-            </div>
         </div>
     </section>
 
@@ -28,17 +23,17 @@ require __DIR__ . '/layout/header.php';
         <div class="feature-box">
             <div class="feature-icon"><i class="fas fa-envelope"></i></div>
             <h3>E-mail</h3>
-            <p><a href="mailto:info@milansimon.sk" style="color: inherit; text-decoration: none;">info@milansimon.sk</a></p>
+            <p><a href="mailto:msphotography@milansimon.com" style="color: inherit; text-decoration: none;">msphotography@milansimon.com</a></p>
         </div>
         <div class="feature-box">
             <div class="feature-icon"><i class="fas fa-phone"></i></div>
             <h3>Telefón</h3>
-            <p>+421 900 000 000</p>
+            <p><a href="tel:+421905014204" style="color: inherit; text-decoration: none;">+421 905 014 204</a></p>
         </div>
         <div class="feature-box">
             <div class="feature-icon"><i class="fas fa-map-marker-alt"></i></div>
             <h3>Lokalita</h3>
-            <p>Bratislava a celé Slovensko</p>
+            <p>Celé Slovensko aj zahraničie</p>
         </div>
     </section>
 

@@ -731,7 +731,7 @@ main {
 }
 
 .btn-primary:hover {
-    background-color: var(--color-accent); /* Signature akcentná zelená na hover, aby nesplynula s čiernym pozadím */
+    background-color: #111111;
     color: white;
 }
 

@@ -650,38 +650,49 @@ main {
 
 .feature-box {
     text-align: center;
-    padding: 30px;
-    background: #fafafa;
-    border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 40px 30px; /* Zväčšený padding pre viac vzdušnosti */
+    background: #1a1a1a; /* Tmavé pozadie zladené s hlavičkou a pätičkou */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Jemný luxusný rámček */
+    border-radius: 10px; /* Moderné zaoblenie */
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .feature-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transform: translateY(-8px); /* Elastický zdvih */
+    background: #222222; /* Mierne zosvetlenie na hover */
+    border-color: var(--color-accent-light); /* Signature akcent na hover */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3); /* Hlbší elegantný tieň */
 }
 
 .feature-icon {
     font-size: 2.5rem;
-    color: var(--color-accent);
+    color: #ffffff; /* Čisto biele ikony */
     margin-bottom: 20px;
+    transition: transform 0.4s ease;
+}
+
+.feature-box:hover .feature-icon {
+    transform: scale(1.1); /* Micro-interakcia zväčšenia ikony */
 }
 
 .feature-box h3 {
     font-family: var(--font-heading);
-    font-weight: 500;
+    font-weight: 400;
     margin-bottom: 15px;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
+    color: #ffffff; /* Biely nadpis */
+    letter-spacing: 1px;
 }
 
 .feature-box p {
-    color: #666;
+    color: #b8b8b8; /* Kontrastná svetlosivá pre perfektné čítanie */
     font-size: 0.95rem;
+    line-height: 1.7;
 }
 
 /* Call to Action pre O mne / Všeobecné */
 .about-cta {
-    background-color: var(--color-accent);
+    background-color: #111111; /* Čierne pozadie zladené s galériou */
     color: white;
     padding: 80px 0;
     margin-bottom: 0; /* Zmenené z -60px na 0 */
@@ -720,7 +731,7 @@ main {
 }
 
 .btn-primary:hover {
-    background-color: #111;
+    background-color: var(--color-accent); /* Signature akcentná zelená na hover, aby nesplynula s čiernym pozadím */
     color: white;
 }
 

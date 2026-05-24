@@ -37,7 +37,7 @@ main {
 }
 
 .subpage-main {
-    padding-top: 80px; /* Pridá odstup pod fixným menu na podstránkach */
+    padding-top: 150px; /* Prispôsobené pre užšiu fixnú hlavičku (70px) + 80px odstup */
 }
 
 /* Pre tmavé podstránky (portfólio detail) zmeníme farbu pozadia main-u na čiernu */
@@ -53,9 +53,15 @@ main {
 }
 
 
-/* Na detaile portfólia nechceme ten padding, lebo tam je tmavé pozadie a chceme full screen efekt */
+/* Na detaile portfólia odsadíme obsah o presnú výšku zmenšenej hlavičky, aby nič nebolo prekryté */
 .subpage-main.no-padding {
-    padding-top: 0;
+    padding-top: 70px;
+}
+
+@media (max-width: 768px) {
+    .subpage-main.no-padding {
+        padding-top: 62px; /* Výška hlavičky na mobile */
+    }
 }
 
 
@@ -79,15 +85,18 @@ main {
 
 /* Modifikátor pre podstránky, kde chceme tmavé pozadie hlavičky, aby bola čitateľná */
 .main-header.header-solid {
-    position: relative;
-    background-color: #1a1a1a;
+    position: fixed;
+    top: 0;
+    background-color: rgba(26, 26, 26, 0.95); /* Prémiové polopriehľadné pozadie s blur efektom */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--spacing-md) 3rem; /* Zväčšený pevný padding pre okraje */
+    padding: 0.6rem 3rem; /* Zmenšený padding pre užšiu hlavičku na desktope */
     max-width: 100%; 
     margin: 0;
     width: 100%;
@@ -103,7 +112,7 @@ main {
 }
 
 .logo-img {
-    height: 85px;        /* Výška na desktope */
+    height: 50px;        /* Zmenšená výška na desktope pre užšiu a modernejšiu hlavičku */
     width: auto;
     object-fit: contain;
     opacity: 0.9;        /* Jemne tlmenejšia biela v základnom stave */
@@ -584,7 +593,7 @@ main {
     height: 100%;
     border-radius: 4px;
     object-fit: cover;
-    object-position: center top;
+    object-position: center 75%;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     display: block;
     /* Rám je teraz priamo súčasťou obrázka, neposúva sa pri zmene veľkosti okna */
@@ -717,15 +726,20 @@ main {
 
 @media (max-width: 992px) {
     .about-hero {
-        flex-direction: column;
-        padding: 0; /* Zmenené z 60px 0 na 0 */
+        flex-direction: column-reverse;
+        padding: 0 0 60px 0;
         gap: 40px;
     }
 
     .about-hero-image {
+        flex: none;
         max-width: 100%;
         width: 100%;
         height: 450px; /* Pekná fixná výška na tablete/mobile pre vyplnenie absolute obrázkom */
+    }
+    .about-hero-text {
+        flex: none;
+        width: 100%;
     }
     .about-features {
         grid-template-columns: 1fr;
@@ -733,17 +747,6 @@ main {
     }
 }
 
-/* Zabezpečenie správneho odsadenia pod fixnou priehľadnou hlavičkou */
-.main-header {
-    position: absolute; /* Vrátené na absolute pre desktop, aby bola priehľadná cez obrázok */
-    background-color: transparent;
-    backdrop-filter: none;
-}
-
-.main-header.header-solid {
-    position: relative;
-    background-color: #1a1a1a;
-}
 
 @media (max-width: 768px) {
     /* Na mobile potrebujeme fixnú hlavičku, inak sa kategórie pri scrollovaní dostanú pod ňu */
@@ -877,6 +880,7 @@ main {
         column-count: 1;
     }
     .about-hero-image {
+        flex: none;
         height: 320px; /* Kompaktnejšia výška na malých telefónoch */
     }
 }

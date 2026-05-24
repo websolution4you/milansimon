@@ -730,7 +730,7 @@ main {
 .btn-primary {
     display: inline-block;
     background-color: white;
-    color: var(--color-accent);
+    color: #111111;
     text-decoration: none;
     font-family: var(--font-heading);
     font-weight: 600;

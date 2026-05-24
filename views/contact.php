@@ -18,7 +18,7 @@ require __DIR__ . '/layout/header.php';
             <p>Snažím sa odpovedať na všetky dopyty do 24 hodín. Ak preferujete telefonický kontakt, neváhajte mi zavolať.</p>
             
             <div class="about-signature" style="font-size: 1.5rem; margin-top: 20px;">
-                Milan Simon
+                Milan Šimon
             </div>
         </div>
     </section>

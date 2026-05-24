@@ -127,7 +127,7 @@ $photos = $pdo->query("SELECT * FROM photos ORDER BY FIELD(category, 'portrety',
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard | Milan Simon</title>
+    <title>Dashboard | Milan Šimon</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -157,7 +157,7 @@ $photos = $pdo->query("SELECT * FROM photos ORDER BY FIELD(category, 'portrety',
 <body>
     <div class="container">
         <a href="logout.php" class="logout">Odhlásiť sa</a>
-        <h1>Milan Simon - Správa fotiek</h1>
+        <h1>Milan Šimon - Správa fotiek</h1>
         
         <?php echo $message; ?>
 

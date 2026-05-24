@@ -7,14 +7,16 @@
     
     <div class="footer-grid">
         <div class="footer-col">
-            <span class="logo-text">Milan Simon<br>Photography</span>
+            <a href="/" class="footer-logo-link">
+                <img src="/assets/img/ms_logo_white.png" alt="Milan Šimon Logo" class="footer-logo-img">
+                <span class="logo-text">Milan Šimon<br>Photography</span>
+            </a>
             <div class="footer-socials-large">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/milansimonphotography/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/milan_simon_photography/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/milansimon/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
             </div>
-            <p class="footer-bottom-text">&copy; Milan Simon Photography <?php echo date("Y"); ?> <a href="/admin/login.php" style="color: inherit; text-decoration: none; opacity: 0.5; margin-left: 10px;" title="Admin panel"><i class="fas fa-lock"></i></a></p>
+            <p class="footer-bottom-text">&copy; Milan Šimon Photography <?php echo date("Y"); ?> <a href="/admin/login.php" style="color: inherit; text-decoration: none; opacity: 0.5; margin-left: 10px;" title="Admin panel"><i class="fas fa-lock"></i></a></p>
         </div>
 
 

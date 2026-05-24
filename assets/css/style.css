@@ -151,7 +151,7 @@ main {
     color: white; /* Biele linky */
     font-family: var(--font-heading); /* Pre menu použijeme tiež Montserrat pre jednotnosť */
     font-weight: 400; /* Zvýšená čitateľnosť */
-    font-size: 1.35rem; /* Zväčšené písmo pre lepšiu vyváženosť s logom */
+    font-size: 1.15rem; /* Vyvážené písmo pre 100% zoom */
     letter-spacing: 1px; /* Jemná medzera */
     text-transform: none; /* Normálne začiatočné veľké písmená, nie všetko UPPERCASE */
     transition: color 0.3s ease;
@@ -169,7 +169,7 @@ main {
 
 .header-socials a {
     color: white; /* Biele ikonky */
-    font-size: 1.35rem; /* Zväčšené podľa menu odkazov */
+    font-size: 1.15rem; /* Zväčšené podľa menu odkazov */
     transition: color 0.3s ease;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
@@ -563,15 +563,12 @@ main {
     background-color: var(--color-accent-light);
 }
 
-/* O mne sekcia - Nový dizajn */
 .about-hero {
     display: flex;
     gap: 80px;
-    align-items: center;
+    align-items: stretch; /* Obidve strany budú mať rovnakú výšku */
     padding: 0 0 100px 0; /* Horný padding zmenený na 0 */
 }
-
-
 
 .about-hero-image {
     flex: 1;
@@ -580,9 +577,14 @@ main {
 }
 
 .about-hero-image img {
+    position: absolute; /* Umožní obrázku dokonale kopírovať výšku textu */
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
     border-radius: 4px;
     object-fit: cover;
+    object-position: center top;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     display: block;
     /* Rám je teraz priamo súčasťou obrázka, neposúva sa pri zmene veľkosti okna */
@@ -713,7 +715,6 @@ main {
     color: white;
 }
 
-/* Responzivita aktualizovaná */
 @media (max-width: 992px) {
     .about-hero {
         flex-direction: column;
@@ -723,6 +724,8 @@ main {
 
     .about-hero-image {
         max-width: 100%;
+        width: 100%;
+        height: 450px; /* Pekná fixná výška na tablete/mobile pre vyplnenie absolute obrázkom */
     }
     .about-features {
         grid-template-columns: 1fr;
@@ -873,6 +876,9 @@ main {
     .masonry-grid-full {
         column-count: 1;
     }
+    .about-hero-image {
+        height: 320px; /* Kompaktnejšia výška na malých telefónoch */
+    }
 }
 
 
@@ -899,26 +905,28 @@ main {
     top: -45px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(50, 50, 50, 0.8); /* Neutrálnejšia farba tlačidla */
-    backdrop-filter: blur(5px);
+    background-color: rgba(20, 20, 20, 0.75); /* Tmavší pre lepší kontrast */
+    backdrop-filter: blur(10px);               /* Lepší sklenený efekt */
     color: white;
     width: 70px;
     height: 45px;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Priesvitný tenký biely rámik */
+    border-bottom: none;                         /* Rámik sa stráca na spodnom okraji */
     border-radius: 25px 25px 0 0;
     cursor: pointer;
     z-index: 1001;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.2); /* Zjemnený tieň */
-    transition: all 0.3s ease;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.4);      /* Hlbší elegantný tieň */
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .footer-toggle-btn:hover {
-    background-color: rgba(70, 70, 70, 0.9);
-    box-shadow: 0 -8px 20px rgba(0,0,0,0.3);
-    transform: translateX(-50%) translateY(-3px);
+    background-color: rgba(44, 95, 93, 0.9);      /* Prerod do signature akcentnej farby */
+    border-color: var(--color-accent-light);      /* Svietivý akcentný rámik */
+    box-shadow: 0 -8px 25px rgba(82, 140, 137, 0.45); /* Jemná žiarivá aura */
+    transform: translateX(-50%) translateY(-5px); /* Plynulejší a vyšší posun nahor */
 }
 
 .footer-toggle-btn i {
@@ -964,15 +972,38 @@ body.footer-open .footer-toggle-btn i {
     line-height: 1.8;
 }
 
+.footer-logo-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center; /* Vertikálne zarovnanie monogramu a textu */
+    gap: 15px;           /* Medzera medzi monogramom a textom */
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.footer-logo-img {
+    height: 70px;        /* Mierne menšia výška v pätičke */
+    width: auto;
+    object-fit: contain;
+    opacity: 0.9;        /* Tlmená biela pre prémiový vnem */
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+}
+
+.footer-logo-link:hover .footer-logo-img {
+    transform: scale(1.08) rotate(-3deg); /* Hravé pootočenie monogramu na hover */
+    opacity: 1;
+}
+
 .footer-col .logo-text {
     font-family: var(--font-heading);
     font-size: 1.6rem;
     font-weight: 300;
-    margin-bottom: 20px;
+    margin-bottom: 0;   /* Zrušíme spodný margin, lebo ho má obalový odkaz */
     display: block;
     color: #ffffff;
     letter-spacing: 2px;
     line-height: 1.4;
+    text-align: left;
 }
 
 .footer-socials-large {
@@ -1071,6 +1102,10 @@ body.footer-open .footer-toggle-btn i {
         width: 60px;
         height: 40px;
         top: -40px;
+    }
+
+    .footer-logo-img {
+        height: 50px; /* Menšia výška loga na mobile */
     }
 
     .footer-col .logo-text {

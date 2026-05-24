@@ -17,10 +17,6 @@ require __DIR__ . '/layout/header.php';
             <p>Vítajte na mojom portfóliu. Už dlhé roky sa venujem foteniu eventov, biznis portrétov a reklamných kampaní. Mojou úlohou je zachytiť to tak, aby z fotiek bolo cítiť energiu a emócie.</p>
             
             <p>Dôraz kladiem na presnosť, prirodzenosť a vizuálne spracovanie, ktoré vystihne klienta a jeho hodnoty. Verím, že osobný prístup je rovnako dôležitý ako samotné technické spracovanie.</p>
-            
-            <div class="about-signature">
-                Milan Simon
-            </div>
         </div>
     </section>
 

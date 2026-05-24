@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milan Simon Photography</title>
+    <title>Milan Šimon Photography</title>
     <!-- Google Fonts: Montserrat (Elegantný/Prémiový) & Lato (Čistý text) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,9 +16,9 @@
 <header class="main-header <?php echo isset($is_subpage) ? 'header-solid' : ''; ?>">
     <div class="header-container">
         <a href="/" class="logo">
-            <img src="/assets/img/ms_logo_white.png" alt="Milan Simon Logo" class="logo-img">
+            <img src="/assets/img/ms_logo_white.png" alt="Milan Šimon Logo" class="logo-img">
             <div class="logo-text-wrapper">
-                <h1>MILAN SIMON</h1>
+                <h1>MILAN ŠIMON</h1>
                 <span>PHOTOGRAPHY</span>
             </div>
         </a>
@@ -29,8 +29,9 @@
             </ul>
         </nav>
         <div class="header-socials">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/milansimonphotography/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/milan_simon_photography/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/milansimon/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <button class="mobile-menu-btn">☰</button>
     </div>

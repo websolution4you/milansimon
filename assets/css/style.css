@@ -602,6 +602,17 @@ main {
     background-color: white; /* Farba pasparty */
 }
 
+/* Prispôsobenie orezania telefónu na kontaktnej stránke, aby bol na mobiloch vycentrovaný */
+.contact-hero-image img {
+    object-position: center center;
+}
+
+@media (max-width: 992px) {
+    .contact-hero-image img {
+        object-position: right center; /* Posunie záber doprava, čím dostane telefón do stredu mobilného výrezu */
+    }
+}
+
 .about-hero-text {
     flex: 1;
 }
@@ -747,9 +758,6 @@ main {
         max-width: 100%;
         width: 100%;
         height: 450px; /* Pekná fixná výška na tablete/mobile pre vyplnenie absolute obrázkom */
-    }
-    .contact-hero-image img {
-        object-position: right center; /* Posunie výrez doprava, aby bol telefón vycentrovaný na mobile */
     }
     .about-hero-text {
         flex: none;

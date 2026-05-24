@@ -9,9 +9,16 @@ $category_titles = [
 $title = isset($category_titles[$category]) ? $category_titles[$category] : 'Galéria';
 
 // 1. Skúsime načítať fotky z databázy
-$stmt = $pdo->prepare('SELECT s3_url FROM photos WHERE category = ? ORDER BY sort_order ASC, created_at DESC');
-$stmt->execute([$category]);
-$db_photos = $stmt->fetchAll(PDO::FETCH_COLUMN);
+$db_photos = [];
+try {
+    if (isset($pdo)) {
+        $stmt = $pdo->prepare('SELECT s3_url FROM photos WHERE category = ? ORDER BY sort_order ASC, created_at DESC');
+        $stmt->execute([$category]);
+        $db_photos = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+} catch (\Exception $e) {
+    // V prípade chyby pripojenia k DB prejdeme na záložné lokálne súbory
+}
 
 if (!empty($db_photos)) {
     $all_photos = $db_photos;

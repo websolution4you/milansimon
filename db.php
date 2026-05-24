@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
-$db   = 'milansimon';
-$user = 'root';
-$pass = ''; 
+$db   = 'qTk3FbF9';
+$user = 'wMqleY6g';
+$pass = 'qIwEInJd6N1C}gd87dv>'; 
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -15,5 +15,5 @@ $options = [
 try {
      $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-     throw new \PDOException($e->getMessage(), (int)$e->getCode());
+     $pdo = null; // Nastavíme na null, aby aplikácia nespadla a mohla použiť lokálny fallback obrázkov
 }

@@ -16,12 +16,14 @@
 <header class="main-header <?php echo isset($is_subpage) ? 'header-solid' : ''; ?>">
     <div class="header-container">
         <a href="/" class="logo">
-            <h1>MILAN SIMON</h1>
-            <span>PHOTOGRAPHY</span>
+            <img src="/assets/img/ms_logo_white.png" alt="Milan Simon Logo" class="logo-img">
+            <div class="logo-text-wrapper">
+                <h1>MILAN SIMON</h1>
+                <span>PHOTOGRAPHY</span>
+            </div>
         </a>
         <nav class="main-nav">
             <ul>
-                <li><a href="/">Portfólio</a></li>
                 <li><a href="/o-mne">O mne</a></li>
                 <li><a href="/kontakt">Kontakt</a></li>
             </ul>

@@ -651,7 +651,7 @@ main {
 .feature-box {
     text-align: center;
     padding: 40px 30px; /* Zväčšený padding pre viac vzdušnosti */
-    background: #494848;
+    background: #3c3b3b;
     border: 1px solid rgba(255, 255, 255, 0.05); /* Jemný luxusný rámček */
     border-radius: 10px; /* Moderné zaoblenie */
     transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -659,7 +659,7 @@ main {
 
 .feature-box:hover {
     transform: translateY(-8px); /* Elastický zdvih */
-    background: #575656; /* Mierne zosvetlenie na hover */
+    background: #484747; /* Mierne zosvetlenie na hover */
     border-color: var(--color-accent-light); /* Signature akcent na hover */
     box-shadow: 0 15px 40px rgba(0,0,0,0.3); /* Hlbší elegantný tieň */
 }

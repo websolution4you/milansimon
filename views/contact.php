@@ -46,7 +46,7 @@ require __DIR__ . '/layout/header.php';
 <div class="container">
     <!-- Hero sekcia pre Kontakt - v štýle O mne -->
     <section class="about-hero">
-        <div class="about-hero-image">
+        <div class="about-hero-image contact-hero-image">
             <img src="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=800&q=80" alt="Kontaktujte ma">
         </div>
         <div class="about-hero-text">

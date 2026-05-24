@@ -748,6 +748,9 @@ main {
         width: 100%;
         height: 450px; /* Pekná fixná výška na tablete/mobile pre vyplnenie absolute obrázkom */
     }
+    .contact-hero-image img {
+        object-position: right center; /* Posunie výrez doprava, aby bol telefón vycentrovaný na mobile */
+    }
     .about-hero-text {
         flex: none;
         width: 100%;

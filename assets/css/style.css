@@ -853,52 +853,59 @@ main {
 /* ROZŠÍRITEĽNÝ FOOTER (PETER BRICHTA ŠTÝL) */
 .main-footer {
     position: fixed;
-    bottom: -600px; /* Dostatočne hlboko, aby bol skrytý */
+    bottom: -600px;
     left: 0;
     width: 100%;
-    background-color: white;
-    color: #333;
-    padding: 60px 0 40px;
+    background-color: rgba(30, 30, 30, 0.95); /* Tmavosivá farba, mierne priehľadná pre menší kontrast */
+    backdrop-filter: blur(10px); /* Rozmazanie podkladu */
+    color: #f5f5f5;
+    padding: 80px 0 50px;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 -15px 40px rgba(0,0,0,0.2); /* Zjemnený tieň */
     text-align: left;
-    border-top: none;
-    /* Dôležité: posúvame footer transformáciou, je to plynulejšie a istejšie ako meniť bottom */
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Zjemnená čiara */
 }
 
 .footer-toggle-btn {
-    position: absolute; /* Teraz absolútne voči footru */
-    top: -40px; /* Trčí nad footrom */
+    position: absolute;
+    top: -45px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--color-accent);
+    background-color: rgba(50, 50, 50, 0.8); /* Neutrálnejšia farba tlačidla */
+    backdrop-filter: blur(5px);
     color: white;
-    width: 60px;
-    height: 40px;
+    width: 70px;
+    height: 45px;
     border: none;
-    border-radius: 20px 20px 0 0;
+    border-radius: 25px 25px 0 0;
     cursor: pointer;
     z-index: 1001;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.2); /* Zjemnený tieň */
+    transition: all 0.3s ease;
+}
+
+.footer-toggle-btn:hover {
+    background-color: rgba(70, 70, 70, 0.9);
+    box-shadow: 0 -8px 20px rgba(0,0,0,0.3);
+    transform: translateX(-50%) translateY(-3px);
 }
 
 .footer-toggle-btn i {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     transition: transform 0.4s ease;
 }
 
-/* Keď je footer otvorený - JS pridá triedu na body */
-body.footer-open .main-footer {
-    /* Transformácia prebehne v JS, ale toto je fallback, keby sme to robili cez CSS */
+body.footer-open .footer-toggle-btn {
+    background-color: rgba(30, 30, 30, 0.95); /* Zladenie s otvoreným footrom */
 }
 
-body.footer-open .footer-toggle-btn {
-    background-color: #666; /* Zmena farby pri zatváraní */
-    /* Odstránené preklápanie border-radiusu, nech je to stále taký "jazýček" */
+body.footer-open .footer-toggle-btn:hover {
+    background-color: rgba(50, 50, 50, 0.95);
+    box-shadow: 0 -8px 20px rgba(0,0,0,0.3);
 }
 
 body.footer-open .footer-toggle-btn i {
@@ -907,55 +914,72 @@ body.footer-open .footer-toggle-btn i {
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 50px;
+    padding: 0 60px;
 }
 
 .footer-col h3 {
     font-family: var(--font-heading);
-    font-weight: 500;
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    color: #000;
+    font-weight: 400;
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .footer-col p {
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.6;
+    color: #b8b8b8;
+    font-size: 0.95rem;
+    line-height: 1.8;
 }
 
 .footer-col .logo-text {
     font-family: var(--font-heading);
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 15px;
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 20px;
     display: block;
+    color: #ffffff;
+    letter-spacing: 2px;
+    line-height: 1.4;
 }
 
 .footer-socials-large {
     display: flex;
-    gap: 20px;
-    margin: 20px 0;
+    gap: 25px;
+    margin: 30px 0;
 }
 
 .footer-socials-large a {
-    color: #333;
-    font-size: 1.2rem;
-    transition: color 0.3s;
+    color: #b8b8b8;
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-socials-large a:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-light);
+    background: rgba(44, 95, 93, 0.2);
+    border-color: var(--color-accent-light);
+    transform: translateY(-3px);
 }
 
 .footer-bottom-text {
-    margin-top: 40px;
-    color: #999;
-    font-size: 0.8rem;
+    margin-top: 50px;
+    color: #777;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
 }
 
 .footer-links-list {
@@ -964,26 +988,77 @@ body.footer-open .footer-toggle-btn i {
 }
 
 .footer-links-list li {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: #b8b8b8;
 }
 
 .footer-links-list a {
     text-decoration: none;
-    color: #666;
-    font-size: 0.9rem;
-    transition: color 0.3s;
+    color: var(--color-accent-light);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
 }
 
 .footer-links-list a:hover {
-    color: var(--color-accent);
+    color: #ffffff;
+    border-bottom-color: var(--color-accent-light);
 }
 
 .footer-link-more {
     display: inline-block;
-    margin-top: 15px;
+    margin-top: 20px;
     color: var(--color-accent-light);
     text-decoration: none;
     font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border: 1px solid var(--color-accent-light);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.footer-link-more:hover {
+    background-color: var(--color-accent-light);
+    color: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(44, 95, 93, 0.3);
+}
+
+/* Responzivita footera pre mobile */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 0 30px;
+    }
+
+    .main-footer {
+        padding: 60px 0 40px;
+    }
+
+    .footer-toggle-btn {
+        width: 60px;
+        height: 40px;
+        top: -40px;
+    }
+
+    .footer-col .logo-text {
+        font-size: 1.4rem;
+    }
+
+    .footer-socials-large {
+        gap: 20px;
+    }
+
+    .footer-socials-large a {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
 }
 
 /* TESTOVACIE MENU STYLY */

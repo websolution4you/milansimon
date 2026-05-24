@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milan Simon Fotograf</title>
+    <title>Milan Simon Photography</title>
     <!-- Google Fonts: Montserrat (Elegantný/Prémiový) & Lato (Čistý text) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
     <div class="header-container">
         <a href="/" class="logo">
             <h1>MILAN SIMON</h1>
-            <span>FOTOGRAF</span>
+            <span>PHOTOGRAPHY</span>
         </a>
         <nav class="main-nav">
             <ul>

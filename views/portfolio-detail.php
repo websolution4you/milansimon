@@ -42,6 +42,23 @@ if (!empty($db_photos)) {
     }
 }
 
+// Pomocná funkcia na preradenie položiek pre horizontálne zobrazovanie zľava doprava v CSS stĺpcoch
+function reorder_for_columns($items, $num_cols) {
+    if (empty($items) || $num_cols <= 1) return $items;
+    $cols = array_fill(0, $num_cols, []);
+    foreach ($items as $index => $item) {
+        $cols[$index % $num_cols][] = $item;
+    }
+    $reordered = [];
+    for ($c = 0; $c < $num_cols; $c++) {
+        $reordered = array_merge($reordered, $cols[$c]);
+    }
+    return $reordered;
+}
+
+// Preradíme fotky pre horizontálny flow (zľava doprava) pre 4 stĺpce na desktope
+$all_photos = reorder_for_columns($all_photos, 4);
+
 
 
 // Zmena hlavičky pre podstránky (aby nebola transparentná nad obrázkami ako na domovskej)

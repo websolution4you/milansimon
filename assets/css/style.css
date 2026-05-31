@@ -339,22 +339,20 @@ main {
 }
 
 .masonry-grid-full {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
-    align-items: start;
+    column-count: 4; /* Viac stĺpcov ako pôvodne (3) */
+    column-gap: 4px; /* 3. Mikro-medzera medzi stĺpcami */
     padding: 0;
 }
 
 @media (max-width: 1200px) {
     .masonry-grid-full {
-        grid-template-columns: repeat(3, 1fr);
+        column-count: 3;
     }
 }
 
 @media (max-width: 768px) {
     .masonry-grid-full {
-        grid-template-columns: repeat(2, 1fr);
+        column-count: 2;
     }
 }
 
@@ -362,11 +360,13 @@ main {
 
 @media (max-width: 480px) {
     .masonry-grid-full {
-        grid-template-columns: 1fr;
+        column-count: 1;
     }
 }
 
 .masonry-item-full {
+    break-inside: avoid;
+    margin-bottom: 4px; /* 3. Mikro-medzera vertikálne */
     position: relative;
     overflow: hidden;
     cursor: pointer; /* Indikátor, že sa dá na fotku kliknúť */
@@ -911,7 +911,7 @@ main {
 
 @media (max-width: 480px) {
     .masonry-grid-full {
-        grid-template-columns: 1fr;
+        column-count: 1;
     }
     .about-hero-image {
         flex: none;

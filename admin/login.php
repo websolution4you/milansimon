@@ -8,21 +8,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
-    try {
-        $stmt = $pdo->prepare('SELECT * FROM users WHERE username = ?');
-        $stmt->execute([$username]);
-        $user = $stmt->fetch();
+    if ($pdo === null) {
+        $error = 'Pripojenie k databáze zlyhalo. Na lokálnom serveri nie je možné prihlásiť sa bez nakonfigurovanej lokálnej databázy.';
+    } else {
+        try {
+            $stmt = $pdo->prepare('SELECT * FROM users WHERE username = ?');
+            $stmt->execute([$username]);
+            $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            header('Location: dashboard.php');
-            exit;
-        } else {
-            $error = 'Nesprávne meno alebo heslo.';
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                header('Location: dashboard.php');
+                exit;
+            } else {
+                $error = 'Nesprávne meno alebo heslo.';
+            }
+        } catch (Exception $e) {
+            $error = 'Chyba databázy: ' . $e->getMessage();
         }
-    } catch (Exception $e) {
-        $error = 'Chyba databázy: ' . $e->getMessage();
     }
 }
 ?>

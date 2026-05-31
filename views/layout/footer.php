@@ -9,7 +9,7 @@
         <div class="footer-col">
             <a href="/" class="footer-logo-link">
                 <img src="/assets/img/ms_logo_white.png" alt="Milan Šimon Logo" class="footer-logo-img">
-                <span class="logo-text">Milan Šimon<br>Photography</span>
+                <span class="logo-text">MILAN ŠIMON<br>PHOTOGRAPHY</span>
             </a>
             <div class="footer-socials-large">
                 <a href="https://www.facebook.com/milansimonphotography/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>

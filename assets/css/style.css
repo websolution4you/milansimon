@@ -112,7 +112,7 @@ main {
 }
 
 .logo-img {
-    height: 50px;        /* Zmenšená výška na desktope pre užšiu a modernejšiu hlavičku */
+    height: 56px;        /* Zväčšená výška na desktope pre lepšiu viditeľnosť a zarovnanie */
     width: auto;
     object-fit: contain;
     opacity: 0.9;        /* Jemne tlmenejšia biela v základnom stave */
@@ -129,19 +129,23 @@ main {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-between;
+    height: 56px;        /* Zhodná výška s obrázkom pre perfektné zarovnanie hore a dole */
 }
 
 .logo h1 {
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: 1.95rem;  /* Väčšie, prémiové písmo */
     font-weight: 300;
     letter-spacing: 2px;
+    line-height: 0.95;   /* Tesný riadkovací odstup na zrušenie prázdneho miesta */
 }
 
 .logo span {
-    font-size: 0.8rem;
+    font-size: 0.95rem;  /* Väčšie, vyvážené písmo */
     letter-spacing: 4px;
     color: #e0e0e0;
+    line-height: 0.95;   /* Tesný riadkovací odstup */
 }
 
 .main-nav {
@@ -262,6 +266,7 @@ main {
     text-align: center;
     transform: translateY(0); /* Reset transformácie pre desktop */
     opacity: 1; /* Reset opacity pre desktop */
+    cursor: pointer;        /* Zobrazí kurzor prsta len nad tlačidlom */
 }
 
 
@@ -796,18 +801,25 @@ main {
     }
 
     .logo-img {
-        height: 30px; /* Menšie logo na mobile */
+        height: 34px; /* Mierne zväčšené na mobile */
         opacity: 1;   /* Plná svietivosť na mobile */
     }
 
+    .logo-text-wrapper {
+        height: 34px; /* Zhodná výška pre perfektné zarovnanie na mobile */
+        justify-content: space-between;
+    }
+
     .logo h1 {
-        font-size: 0.95rem;
+        font-size: 1.1rem; /* Mierne zväčšené */
         letter-spacing: 0.5px;
+        line-height: 0.95;
     }
     
     .logo span {
-        font-size: 0.55rem;
+        font-size: 0.6rem; /* Mierne zväčšené */
         letter-spacing: 1.5px;
+        line-height: 0.95;
     }
     
     /* Úprava menu aby sa stopercentne zmestilo a nezalomilo */
@@ -839,7 +851,7 @@ main {
         width: 100%;
         margin-bottom: 2px;
         display: block;
-        cursor: pointer; /* Indikátor klikateľnosti */
+        cursor: default; /* Ponecháme predvolený kurzor nad obrázkom */
         -webkit-tap-highlight-color: transparent; /* Odstráni modrý záblesk pri kliknutí */
     }
 
@@ -1132,7 +1144,7 @@ body.footer-open .footer-toggle-btn i {
     }
 
     .footer-logo-img {
-        height: 50px; /* Menšia výška loga na mobile */
+        height: 60px; /* Menšia výška loga na mobile */
     }
 
     .footer-col .logo-text {

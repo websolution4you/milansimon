@@ -148,22 +148,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 4. MOBILE CATEGORY CLICK LOGIC
-
-    // Na mobile chceme, aby kliknutie na celú kartu presmerovalo na kategóriu,
-    // ale len ak je karta práve v strede pohľadu (in-view), čím predídeme nechceným klikom pri scrollovaní.
-    if (window.innerWidth <= 768) {
-        const categoryCards = document.querySelectorAll('.category-card');
-        categoryCards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                // Ak karta má triedu 'in-view', znamená to, že je aktívna
-                if (card.classList.contains('in-view')) {
-                    const link = card.querySelector('.category-btn');
-                    if (link) {
-                        window.location.href = link.href;
-                    }
+    // 4. CATEGORY CLICK LOGIC
+    // Umožní prejsť do danej kategórie kliknutím na akúkoľvek časť karty (obrázok).
+    const categoryCards = document.querySelectorAll('.category-card');
+    categoryCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Ak užívateľ klikol priamo na tlačidlo, necháme pracovať štandardný odkaz
+            if (e.target.closest('.category-btn')) return;
+            
+            // Na desktope presmerujeme ihneď, na mobile len ak je karta "in-view" (ochrana pri scrollovaní)
+            if (window.innerWidth > 768 || card.classList.contains('in-view')) {
+                const link = card.querySelector('.category-btn');
+                if (link) {
+                    window.location.href = link.href;
                 }
-            });
+            }
         });
-    }
+    });
 });

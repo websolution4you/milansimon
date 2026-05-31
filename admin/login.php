@@ -9,7 +9,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = trim($_POST['password'] ?? '');
 
     if ($pdo === null) {
-        $error = 'Pripojenie k databáze zlyhalo. Na lokálnom serveri nie je možné prihlásiť sa bez nakonfigurovanej lokálnej databázy.';
+        // Lokálny bypass pre vývoj a testovanie bez databázy
+        if ($username === 'admin' && $password === 'admin') {
+            $_SESSION['user_id'] = 999;
+            $_SESSION['username'] = 'admin_local';
+            header('Location: dashboard.php');
+            exit;
+        } else {
+            $error = 'Pripojenie k databáze zlyhalo. Pre lokálne testovanie bez databázy zadajte Meno: admin a Heslo: admin';
+        }
     } else {
         try {
             $stmt = $pdo->prepare('SELECT * FROM users WHERE username = ?');

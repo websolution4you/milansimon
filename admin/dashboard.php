@@ -146,7 +146,21 @@ if ($is_db_connected) {
         $message = '<div class="success">Nové poradie fotiek pre kategóriu ' . htmlspecialchars($selected_category) . ' bolo úspešne uložené!</div>';
     }
 
-    // Získanie fotiek z DB pre vybranú kategóriu zoradených podľa poradia
+    // 1. Automatické prečíslovanie (auto-resequencing) pre odstránenie duplicít a dier v danej kategórii
+    $stmtSeq = $pdo->prepare("SELECT id FROM photos WHERE category = ? ORDER BY sort_order ASC, created_at ASC");
+    $stmtSeq->execute([$selected_category]);
+    $photos_to_seq = $stmtSeq->fetchAll(PDO::FETCH_COLUMN);
+
+    if (!empty($photos_to_seq)) {
+        $seq_index = 1;
+        $stmtSeqUpdate = $pdo->prepare("UPDATE photos SET sort_order = ? WHERE id = ?");
+        foreach ($photos_to_seq as $seq_id) {
+            $stmtSeqUpdate->execute([$seq_index, $seq_id]);
+            $seq_index++;
+        }
+    }
+
+    // 2. Získanie čistých a správne zoradených fotiek pre vybranú kategóriu
     $stmt = $pdo->prepare("SELECT * FROM photos WHERE category = ? ORDER BY sort_order ASC, created_at DESC");
     $stmt->execute([$selected_category]);
     $photos = $stmt->fetchAll();

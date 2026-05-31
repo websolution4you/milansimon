@@ -185,40 +185,6 @@ if ($is_db_connected) {
         .save-order-btn:hover { background: #218838; }
         .logout { float: right; color: #ff4d4d; text-decoration: none; font-size: 14px; border: 1px solid #ff4d4d; padding: 5px 15px; border-radius: 20px; }
         .tag { background: #eee; padding: 3px 10px; border-radius: 10px; font-size: 11px; text-transform: uppercase; }
-        
-        .category-tabs {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px;
-        }
-        .tab-btn {
-            text-decoration: none;
-            color: #555;
-            background: #fff;
-            border: 1px solid #ddd;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .tab-btn:hover {
-            background: #f0f0f0;
-            color: #111;
-            border-color: #ccc;
-        }
-        .tab-btn.active {
-            background: #333;
-            color: #fff;
-            border-color: #333;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
     </style>
 </head>
 <body>
@@ -231,7 +197,7 @@ if ($is_db_connected) {
         <div class="upload-section">
             <h3>Nahrať novú fotku</h3>
             <form method="POST" enctype="multipart/form-data" action="dashboard.php?category=<?php echo $selected_category; ?>">
-                <select name="category" required>
+                <select name="category" required onchange="location.href='dashboard.php?category=' + this.value">
                     <option value="portrety" <?php echo $selected_category === 'portrety' ? 'selected' : ''; ?>>Biznis Portréty</option>
                     <option value="sport" <?php echo $selected_category === 'sport' ? 'selected' : ''; ?>>Reklama a Šport</option>
                     <option value="eventy" <?php echo $selected_category === 'eventy' ? 'selected' : ''; ?>>Eventy</option>
@@ -239,19 +205,6 @@ if ($is_db_connected) {
                 <input type="file" name="photos[]" accept="image/*" multiple required>
                 <button type="submit"><i class="fas fa-cloud-upload-alt"></i> NAHRAŤ NA SERVER</button>
             </form>
-        </div>
-
-        <!-- Filtrovanie podľa kategórie -->
-        <div class="category-tabs">
-            <a href="dashboard.php?category=portrety" class="tab-btn <?php echo $selected_category === 'portrety' ? 'active' : ''; ?>">
-                <i class="fas fa-user-tie"></i> Biznis Portréty
-            </a>
-            <a href="dashboard.php?category=sport" class="tab-btn <?php echo $selected_category === 'sport' ? 'active' : ''; ?>">
-                <i class="fas fa-running"></i> Reklama a Šport
-            </a>
-            <a href="dashboard.php?category=eventy" class="tab-btn <?php echo $selected_category === 'eventy' ? 'active' : ''; ?>">
-                <i class="fas fa-calendar-alt"></i> Eventy
-            </a>
         </div>
 
         <form method="POST" action="dashboard.php?category=<?php echo $selected_category; ?>">

@@ -26,17 +26,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email_body .= "Predmet: " . (empty($subject) ? 'Nie je uvedený' : $subject) . "\n\n";
         $email_body .= "Správa:\n$message\n";
         
-        $headers = "From: web@milansimon.com\r\n";
+        // Na WebSupporte a iných hostingoch musí "From" email existovať na danej doméne, aby mail prešiel spamfiltrom
+        $headers = "From: $to\r\n";
         $headers .= "Reply-To: $email\r\n";
         $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
         
-        // V lokálnom prostredí nemusí mail() prejsť, no skúsime ho odoslať a prednastaviť úspech
-        @mail($to, $email_subject, $email_body, $headers);
+        $mail_sent = false;
+        if (isset($_SERVER['HTTP_HOST']) && (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false || strpos($_SERVER['HTTP_HOST'], '127.0.0.1') !== false)) {
+            // V lokálnom prostredí simulujeme úspech pre testovacie účely
+            $mail_sent = true;
+        } else {
+            // Na live serveri pridávame 5. parameter "-f", ktorý nastavuje Envelope Sender (Return-Path), čo je kľúčové pre prechod cez SPF na WebSupporte
+            $mail_sent = @mail($to, $email_subject, $email_body, $headers, "-f" . $to);
+        }
         
-        $success_message = 'Vaša správa bola úspešne odoslaná! Budem vás kontaktovať čo najskôr.';
-        
-        // Vyčistíme polia po úspešnom odoslaní
-        $_POST = [];
+        if ($mail_sent) {
+            $success_message = 'Vaša správa bola úspešne odoslaná! Budem vás kontaktovať čo najskôr.';
+            // Vyčistíme polia po úspešnom odoslaní
+            $_POST = [];
+        } else {
+            $error_message = 'Odoslanie správy zlyhalo. Prosím, napíšte mi priamo na e-mail: ' . htmlspecialchars($to);
+        }
     }
 }
 

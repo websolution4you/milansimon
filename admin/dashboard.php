@@ -197,7 +197,7 @@ if ($is_db_connected) {
         <div class="upload-section">
             <h3>Nahrať novú fotku</h3>
             <form method="POST" enctype="multipart/form-data" action="dashboard.php?category=<?php echo $selected_category; ?>">
-                <select name="category" required onchange="location.href='dashboard.php?category=' + this.value">
+                <select name="category" required onchange="window.location.href='dashboard.php?category=' + this.value">
                     <option value="portrety" <?php echo $selected_category === 'portrety' ? 'selected' : ''; ?>>Biznis Portréty</option>
                     <option value="sport" <?php echo $selected_category === 'sport' ? 'selected' : ''; ?>>Reklama a Šport</option>
                     <option value="eventy" <?php echo $selected_category === 'eventy' ? 'selected' : ''; ?>>Eventy</option>

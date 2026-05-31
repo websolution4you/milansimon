@@ -139,6 +139,7 @@ main {
     font-weight: 300;
     letter-spacing: 2px;
     line-height: 0.95;   /* Tesný riadkovací odstup na zrušenie prázdneho miesta */
+    text-transform: uppercase;
 }
 
 .logo span {
@@ -146,6 +147,7 @@ main {
     letter-spacing: 4px;
     color: #e0e0e0;
     line-height: 0.95;   /* Tesný riadkovací odstup */
+    text-transform: uppercase;
 }
 
 .main-nav {
@@ -1042,6 +1044,7 @@ body.footer-open .footer-toggle-btn i {
     letter-spacing: 2px;
     line-height: 1.4;
     text-align: left;
+    text-transform: uppercase;
 }
 
 .footer-socials-large {

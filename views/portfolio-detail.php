@@ -42,25 +42,6 @@ if (!empty($db_photos)) {
     }
 }
 
-// Pomocná funkcia na preradenie položiek pre horizontálne zobrazovanie zľava doprava v CSS stĺpcoch
-function reorder_for_columns($items, $num_cols) {
-    if (empty($items) || $num_cols <= 1) return $items;
-    $cols = array_fill(0, $num_cols, []);
-    foreach ($items as $index => $item) {
-        $cols[$index % $num_cols][] = $item;
-    }
-    $reordered = [];
-    for ($c = 0; $c < $num_cols; $c++) {
-        $reordered = array_merge($reordered, $cols[$c]);
-    }
-    return $reordered;
-}
-
-// Preradíme fotky pre horizontálny flow (zľava doprava) pre 4 stĺpce na desktope
-$all_photos = reorder_for_columns($all_photos, 4);
-
-
-
 // Zmena hlavičky pre podstránky (aby nebola transparentná nad obrázkami ako na domovskej)
 $is_subpage = true; 
 $no_padding = true;
@@ -75,15 +56,24 @@ require __DIR__ . '/layout/header.php';
 <div class="portfolio-masonry-wrapper">
     <a href="/" class="floating-back-btn">&larr; Späť na domov</a>
     
-                <section class="masonry-grid-full">
-                <?php foreach ($all_photos as $index => $photo): ?>
-                <div class="masonry-item-full portfolio-img">
-                    <img src="<?php echo $photo; ?>" alt="Fotografia portfólia <?php echo $index; ?>" loading="lazy" data-src="<?php echo $photo; ?>">
-                </div>
+    <section class="masonry-grid-flex">
+        <?php
+        $num_cols = 4;
+        $cols = array_fill(0, $num_cols, []);
+        foreach ($all_photos as $index => $photo) {
+            $cols[$index % $num_cols][] = ['index' => $index, 'photo' => $photo];
+        }
+        ?>
+        <?php for ($c = 0; $c < $num_cols; $c++): ?>
+            <div class="masonry-col">
+                <?php foreach ($cols[$c] as $item): ?>
+                    <div class="masonry-item-full portfolio-img">
+                        <img src="<?php echo $item['photo']; ?>" alt="Fotografia portfólia <?php echo $item['index']; ?>" loading="lazy" data-src="<?php echo $item['photo']; ?>">
+                    </div>
                 <?php endforeach; ?>
+            </div>
+        <?php endfor; ?>
     </section>
-
-
 </div>
 
 <!-- Lightbox Modal -->

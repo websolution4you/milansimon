@@ -338,35 +338,38 @@ main {
     background-color: var(--color-accent);
 }
 
-.masonry-grid-full {
-    column-count: 4; /* Viac stĺpcov ako pôvodne (3) */
-    column-gap: 4px; /* 3. Mikro-medzera medzi stĺpcami */
+.masonry-grid-flex {
+    display: flex;
+    gap: 4px;
     padding: 0;
+    width: 100%;
 }
 
-@media (max-width: 1200px) {
-    .masonry-grid-full {
-        column-count: 3;
+.masonry-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+@media (max-width: 992px) {
+    .masonry-grid-flex {
+        flex-wrap: wrap;
+    }
+    .masonry-col {
+        flex: 1 1 calc(50% - 4px); /* 2 stĺpce na stredných zariadeniach */
+        min-width: 45%;
     }
 }
 
-@media (max-width: 768px) {
-    .masonry-grid-full {
-        column-count: 2;
-    }
-}
-
-
-
-@media (max-width: 480px) {
-    .masonry-grid-full {
-        column-count: 1;
+@media (max-width: 576px) {
+    .masonry-col {
+        flex: 1 1 100%; /* 1 stĺpec na mobiloch */
+        min-width: 100%;
     }
 }
 
 .masonry-item-full {
-    break-inside: avoid;
-    margin-bottom: 4px; /* 3. Mikro-medzera vertikálne */
     position: relative;
     overflow: hidden;
     cursor: pointer; /* Indikátor, že sa dá na fotku kliknúť */
@@ -910,9 +913,6 @@ main {
 
 
 @media (max-width: 480px) {
-    .masonry-grid-full {
-        column-count: 1;
-    }
     .about-hero-image {
         flex: none;
         height: 320px; /* Kompaktnejšia výška na malých telefónoch */

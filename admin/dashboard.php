@@ -130,6 +130,25 @@ if ($is_db_connected) {
         exit;
     }
 
+    // Spracovanie náhodného rozhádzania poradia
+    if (isset($_POST['shuffle_order'])) {
+        $stmtSeq = $pdo->prepare("SELECT id FROM photos WHERE category = ?");
+        $stmtSeq->execute([$selected_category]);
+        $photo_ids = $stmtSeq->fetchAll(PDO::FETCH_COLUMN);
+
+        if (!empty($photo_ids)) {
+            shuffle($photo_ids); // Náhodné zamiešanie poľa ID fotiek
+            $seq_index = 1;
+            $stmtSeqUpdate = $pdo->prepare("UPDATE photos SET sort_order = ? WHERE id = ?");
+            foreach ($photo_ids as $seq_id) {
+                $stmtSeqUpdate->execute([$seq_index, $seq_id]);
+                $seq_index++;
+            }
+        }
+        header('Location: dashboard.php?category=' . urlencode($selected_category) . '&shuffled=1');
+        exit;
+    }
+
     // Spracovanie notifikácií/správ
     if (isset($_GET['uploaded'])) {
         $count = (int)$_GET['uploaded'];
@@ -144,6 +163,9 @@ if ($is_db_connected) {
     }
     if (isset($_GET['ordered'])) {
         $message = '<div class="success">Nové poradie fotiek pre kategóriu ' . htmlspecialchars($selected_category) . ' bolo úspešne uložené!</div>';
+    }
+    if (isset($_GET['shuffled'])) {
+        $message = '<div class="success">Poradie fotiek v kategórii ' . htmlspecialchars($selected_category) . ' bolo náhodne rozhádzané!</div>';
     }
 
     // 1. Automatické prečíslovanie (auto-resequencing) pre odstránenie duplicít a dier v danej kategórii
@@ -195,8 +217,10 @@ if ($is_db_connected) {
         .btn-delete { color: #d73a49; text-decoration: none; font-size: 18px; }
         .btn-delete:hover { color: #b31d28; }
         .order-input { width: 60px; text-align: center; }
-        .save-order-btn { margin-top: 20px; background: #28a745; padding: 12px 20px; font-weight: 600; }
+        .save-order-btn { background: #28a745; padding: 12px 20px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
         .save-order-btn:hover { background: #218838; }
+        .shuffle-btn { background: #6c757d; padding: 12px 20px; font-weight: 600; color: white; border: none; border-radius: 5px; cursor: pointer; transition: 0.3s; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .shuffle-btn:hover { background: #5a6268; }
         .logout { float: right; color: #ff4d4d; text-decoration: none; font-size: 14px; border: 1px solid #ff4d4d; padding: 5px 15px; border-radius: 20px; }
         .tag { background: #eee; padding: 3px 10px; border-radius: 10px; font-size: 11px; text-transform: uppercase; }
     </style>
@@ -222,9 +246,18 @@ if ($is_db_connected) {
         </div>
 
         <form method="POST" action="dashboard.php?category=<?php echo $selected_category; ?>">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h3>Zoznam nahraných fotiek</h3>
-                <button type="submit" name="update_order" class="save-order-btn"><i class="fas fa-save"></i> ULOŽIŤ PORADIE</button>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 10px;">
+                <h3 style="margin: 0;">Zoznam nahraných fotiek</h3>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <?php if (!empty($photos)): ?>
+                        <button type="submit" name="shuffle_order" class="shuffle-btn" onclick="return confirm('Naozaj chcete náhodne rozhádzať poradie všetkých fotiek v tejto kategórii?')">
+                            <i class="fas fa-random"></i> ROZHÁDZAŤ PORADIE
+                        </button>
+                        <button type="submit" name="update_order" class="save-order-btn">
+                            <i class="fas fa-save"></i> ULOŽIŤ PORADIE
+                        </button>
+                    <?php endif; ?>
+                </div>
             </div>
             
             <table class="photo-list">

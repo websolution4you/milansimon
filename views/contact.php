@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Skúsime odoslať email fotografovi
         $to = 'msphotography@milansimon.com';
+        $from_email = 'msphotography@milansimon.com'; // Doménový odosielateľ na WebSupporte
         $email_subject = 'Nový dopyt z webu: ' . (empty($subject) ? 'Kontakt' : $subject);
         
         $email_body = "Dostali ste novú správu z kontaktného formulára na webe Milan Šimon Photography.\n\n";
@@ -27,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email_body .= "Správa:\n$message\n";
         
         // Na WebSupporte a iných hostingoch musí "From" email existovať na danej doméne, aby mail prešiel spamfiltrom
-        $headers = "From: $to\r\n";
+        $headers = "From: $from_email\r\n";
         $headers .= "Reply-To: $email\r\n";
         $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
         
@@ -37,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail_sent = true;
         } else {
             // Na live serveri pridávame 5. parameter "-f", ktorý nastavuje Envelope Sender (Return-Path), čo je kľúčové pre prechod cez SPF na WebSupporte
-            $mail_sent = @mail($to, $email_subject, $email_body, $headers, "-f" . $to);
+            $mail_sent = @mail($to, $email_subject, $email_body, $headers, "-f" . $from_email);
         }
         
         if ($mail_sent) {

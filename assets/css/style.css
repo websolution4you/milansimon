@@ -112,7 +112,7 @@ main {
 }
 
 .logo-img {
-    height: 70px;        /* Zväčšená výška na desktope pre lepšiu viditeľnosť a zarovnanie */
+    height: 72px;        /* Zväčšená výška okrúhleho loga (monogramu) na desktope */
     width: auto;
     object-fit: contain;
     opacity: 0.9;        /* Jemne tlmenejšia biela v základnom stave */
@@ -130,21 +130,21 @@ main {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    height: 70px;        /* Zhodná výška s obrázkom pre perfektné zarovnanie hore a dole */
+    height: 56px;        /* Pôvodná výška textového obalu */
 }
 
 .logo h1 {
     font-family: var(--font-heading);
-    font-size: 2.45rem;  /* Väčšie, prémiové písmo */
+    font-size: 1.95rem;  /* Pôvodné, prémiové písmo */
     font-weight: 300;
-    letter-spacing: 2.5px;
+    letter-spacing: 2px;
     line-height: 0.95;   /* Tesný riadkovací odstup na zrušenie prázdneho miesta */
     text-transform: uppercase;
 }
 
 .logo span {
-    font-size: 1.15rem;  /* Väčšie, vyvážené písmo */
-    letter-spacing: 5px;
+    font-size: 0.95rem;  /* Pôvodné, vyvážené písmo */
+    letter-spacing: 4px;
     color: #e0e0e0;
     line-height: 0.95;   /* Tesný riadkovací odstup */
     text-transform: uppercase;
@@ -806,23 +806,23 @@ main {
     }
 
     .logo-img {
-        height: 42px; /* Zväčšené na mobile */
+        height: 44px; /* Zväčšené okrúhle logo na mobile */
         opacity: 1;   /* Plná svietivosť na mobile */
     }
 
     .logo-text-wrapper {
-        height: 42px; /* Zhodná výška pre perfektné zarovnanie na mobile */
+        height: 34px; /* Pôvodná výška textového obalu na mobile */
         justify-content: space-between;
     }
 
     .logo h1 {
-        font-size: 1.35rem; /* Zväčšené na mobile */
+        font-size: 1.1rem; /* Pôvodné písmo na mobile */
         letter-spacing: 0.5px;
         line-height: 0.95;
     }
     
     .logo span {
-        font-size: 0.7rem; /* Zväčšené na mobile */
+        font-size: 0.6rem; /* Pôvodné písmo na mobile */
         letter-spacing: 1.5px;
         line-height: 0.95;
     }

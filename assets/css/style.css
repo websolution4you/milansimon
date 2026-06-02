@@ -112,7 +112,7 @@ main {
 }
 
 .logo-img {
-    height: 56px;        /* Zväčšená výška na desktope pre lepšiu viditeľnosť a zarovnanie */
+    height: 70px;        /* Zväčšená výška na desktope pre lepšiu viditeľnosť a zarovnanie */
     width: auto;
     object-fit: contain;
     opacity: 0.9;        /* Jemne tlmenejšia biela v základnom stave */
@@ -130,21 +130,21 @@ main {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    height: 56px;        /* Zhodná výška s obrázkom pre perfektné zarovnanie hore a dole */
+    height: 70px;        /* Zhodná výška s obrázkom pre perfektné zarovnanie hore a dole */
 }
 
 .logo h1 {
     font-family: var(--font-heading);
-    font-size: 1.95rem;  /* Väčšie, prémiové písmo */
+    font-size: 2.45rem;  /* Väčšie, prémiové písmo */
     font-weight: 300;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     line-height: 0.95;   /* Tesný riadkovací odstup na zrušenie prázdneho miesta */
     text-transform: uppercase;
 }
 
 .logo span {
-    font-size: 0.95rem;  /* Väčšie, vyvážené písmo */
-    letter-spacing: 4px;
+    font-size: 1.15rem;  /* Väčšie, vyvážené písmo */
+    letter-spacing: 5px;
     color: #e0e0e0;
     line-height: 0.95;   /* Tesný riadkovací odstup */
     text-transform: uppercase;
@@ -806,23 +806,23 @@ main {
     }
 
     .logo-img {
-        height: 34px; /* Mierne zväčšené na mobile */
+        height: 42px; /* Zväčšené na mobile */
         opacity: 1;   /* Plná svietivosť na mobile */
     }
 
     .logo-text-wrapper {
-        height: 34px; /* Zhodná výška pre perfektné zarovnanie na mobile */
+        height: 42px; /* Zhodná výška pre perfektné zarovnanie na mobile */
         justify-content: space-between;
     }
 
     .logo h1 {
-        font-size: 1.1rem; /* Mierne zväčšené */
+        font-size: 1.35rem; /* Zväčšené na mobile */
         letter-spacing: 0.5px;
         line-height: 0.95;
     }
     
     .logo span {
-        font-size: 0.6rem; /* Mierne zväčšené */
+        font-size: 0.7rem; /* Zväčšené na mobile */
         letter-spacing: 1.5px;
         line-height: 0.95;
     }

@@ -112,7 +112,7 @@ main {
 }
 
 .logo-img {
-    height: 72px;        /* Zväčšená výška okrúhleho loga (monogramu) na desktope */
+    height: 80px;        /* Zväčšená výška okrúhleho loga (monogramu) na desktope */
     width: auto;
     object-fit: contain;
     opacity: 0.9;        /* Jemne tlmenejšia biela v základnom stave */
